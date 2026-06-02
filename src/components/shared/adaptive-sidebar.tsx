@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { 
   LayoutDashboard, 
   Compass, 
@@ -19,8 +20,11 @@ import { cn } from '@/lib/utils';
 export function AdaptiveSidebar() {
   const pathname = usePathname();
 
+  const isCeoContext = pathname?.startsWith('/ceo');
+  const dashboardHref = isCeoContext ? '/ceo' : '/owner';
+
   const navItems = [
-    { name: 'Dashboard', href: '/owner', icon: LayoutDashboard },
+    { name: 'Dashboard', href: dashboardHref, icon: LayoutDashboard },
     { name: 'Work', href: '/work', icon: CheckSquare },
     { name: 'Trips', href: '/owner/trips', icon: Compass },
     { name: 'People', href: '/owner/people', icon: Users },
@@ -38,7 +42,7 @@ export function AdaptiveSidebar() {
         {navItems.map((item) => {
           const Icon = item.icon;
           // Matches exact path or is a sub-path of the item href
-          const isActive = pathname === item.href || (item.href !== '/owner' && pathname?.startsWith(item.href));
+          const isActive = pathname === item.href || (item.href !== '/owner' && item.href !== '/ceo' && pathname?.startsWith(item.href));
 
           return (
             <Link
@@ -60,13 +64,33 @@ export function AdaptiveSidebar() {
 
       <div className="p-6 mt-auto border-t border-white/10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
-            OC
-          </div>
-          <div>
-            <p className="text-label text-white font-bold">Owner Admin</p>
-            <p className="text-[10px] text-[#9CA3AF]">v2.4.0 Stable</p>
-          </div>
+          {isCeoContext ? (
+            <>
+              <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center overflow-hidden relative shrink-0">
+                <Image
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEYxhWyCcc1TF_BASKslTCjb2UktrbTSrU1HJbeGCVbaW_3_AlSEvFiNqMGc-zwfih4eUyM_nwoqMw-pG8-2Ur6L4J3sGPHptaU1AIvdsLt587YqACKXTiJpEAzWhm0WKq8JPDadRKYQCT2ABKL2zmOf9nlaMMdRQ_Vw_PG6RudCmcFEKVWPjLbzi3deYyJcF-iJgZz6UH4Cu7SjDg61mjQ8IYxq7qRYJyMWvhF3QvTbwpz-RV65WhlFdyo-LisNEMJi7ZNoTRmiOy"
+                  alt="Rahat Ahmed"
+                  width={40}
+                  height={40}
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-body text-white font-bold leading-none">Rahat Ahmed</p>
+                <p className="text-label text-slate-400 leading-tight">CEO/COO</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold shrink-0">
+                OC
+              </div>
+              <div>
+                <p className="text-label text-white font-bold">Owner Admin</p>
+                <p className="text-[10px] text-[#9CA3AF]">v2.4.0 Stable</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </aside>
