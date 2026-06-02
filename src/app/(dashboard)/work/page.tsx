@@ -1,7 +1,8 @@
 import React from 'react';
 import { ProjectCard } from '@/components/work/project-card';
 import { TaskList, Task } from '@/components/work/task-list';
-import { ChevronRight, Plus, PlusCircle } from 'lucide-react';
+import { WorkControls } from '@/components/work/work-controls';
+import { ChevronRight, PlusCircle } from 'lucide-react';
 import { Metadata } from 'next';
 import { getProjects, getTasks } from '@/actions/work';
 import { getUsers } from '@/actions/users';
@@ -166,13 +167,11 @@ export default async function WorkManagementPage() {
           <h2 className="text-h1 text-on-background">Projects & Tasks</h2>
         </div>
         
-        {/* Actions Button */}
-        <div>
-          <button className="flex items-center gap-xs bg-primary hover:bg-primary/90 text-white px-xl py-sm rounded-none border border-primary/20 hover:shadow-md transition-all text-h4 font-bold tracking-wide active:scale-95">
-            <Plus className="w-5 h-5" />
-            <span>Create New</span>
-          </button>
-        </div>
+        {/* Actions Buttons / Work Controls */}
+        <WorkControls 
+          projects={formattedProjects} 
+          users={dbUsers} 
+        />
       </section>
 
       {/* Project Overview Cards Grid or Brutalist Empty State */}
