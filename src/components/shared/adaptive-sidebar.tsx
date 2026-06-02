@@ -21,8 +21,8 @@ export function AdaptiveSidebar() {
 
   const navItems = [
     { name: 'Dashboard', href: '/owner', icon: LayoutDashboard },
+    { name: 'Work', href: '/work', icon: CheckSquare },
     { name: 'Trips', href: '/owner/trips', icon: Compass },
-    { name: 'Tasks', href: '/owner/tasks', icon: CheckSquare },
     { name: 'People', href: '/owner/people', icon: Users },
     { name: 'Settings', href: '/owner/settings', icon: Settings },
   ];
