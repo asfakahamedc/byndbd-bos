@@ -1,0 +1,56 @@
+'use server';
+
+import { createBOSClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
+import { BOSUser } from '@/lib/types/auth';
+
+/**
+ * Server Action: Fetches the authenticated user profile from Supabase.
+ * Connects the auth.getUser() with the public.users database profile.
+ */
+export async function getCurrentUser(): Promise<BOSUser | null> {
+  const supabase = createBOSClient();
+
+  try {
+    // 1. Retrieve the authenticated user session
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      return null;
+    }
+
+    // 2. Query the public.users table to resolve user layers & metadata
+    const { data: profile, error: dbError } = await supabase
+      .from('users')
+      .select('layer, department, full_name, status, two_fa_enabled')
+      .eq('id', user.id)
+      .single();
+
+    if (dbError || !profile) {
+      console.warn(`No database profile found for auth user ID: ${user.id}`, dbError);
+      return null;
+    }
+
+    // 3. Return the fully resolved custom BOSUser profile
+    return {
+      id: user.id,
+      email: user.email || '',
+      full_name: profile.full_name || '',
+      layer: profile.layer,
+      department: profile.department,
+      status: profile.status || 'active',
+      two_fa_enabled: !!profile.two_fa_enabled,
+    };
+  } catch (error) {
+    console.error('Unhandled error resolving current user profile:', error);
+    return null;
+  }
+}
+
+/**
+ * Server Action: Triggers user sign out and redirects to the login screen.
+ */
+export async function signOut() {
+  const supabase = createBOSClient();
+  await supabase.auth.signOut();
+  redirect('/login');
+}

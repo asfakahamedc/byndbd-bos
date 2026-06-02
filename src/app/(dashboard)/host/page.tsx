@@ -13,14 +13,10 @@ import {
   MapPin,
   Calendar,
   X,
-  Plus,
-  Send,
   Play,
   ChevronRight,
   LifeBuoy,
-  FileText,
   UserCheck,
-  UserX,
   AlertOctagon,
   Check
 } from 'lucide-react';
@@ -202,8 +198,6 @@ export default function HostDashboard() {
   // Dynamic calculations
   const totalTravelersCount = travelers.length;
   const checkedInCount = travelers.filter(t => t.status === 'Checked In').length;
-  const pendingCount = travelers.filter(t => t.status === 'Pending').length;
-  const mildIssuesCount = travelers.filter(t => t.status === 'Mild Issue').length;
 
   // Handlers
   const handleToggleCheckIn = (travelerId: string) => {
@@ -358,7 +352,7 @@ export default function HostDashboard() {
         activeTab === 'trips' && "hidden"
       )}>
         <div className="flex justify-between items-center mb-3">
-          <h3 className="font-h3 text-h3 text-on-surface">Today's Itinerary</h3>
+          <h3 className="font-h3 text-h3 text-on-surface">Today&apos;s Itinerary</h3>
           <button className="text-primary font-label hover:underline text-xs uppercase tracking-wider font-bold">
             [View Map]
           </button>
@@ -613,7 +607,7 @@ export default function HostDashboard() {
             </div>
             
             <div className="p-5 space-y-4 max-h-[300px] overflow-y-auto">
-              <p className="text-xs text-on-surface-variant font-medium">Check off travelers as they account for today's Ridge Hike:</p>
+              <p className="text-xs text-on-surface-variant font-medium">Check off travelers as they account for today&apos;s Ridge Hike:</p>
               <div className="space-y-2.5">
                 {travelers.map((t) => (
                   <div 
@@ -691,7 +685,7 @@ export default function HostDashboard() {
                 </label>
                 <select
                   value={incidentSeverity}
-                  onChange={(e) => setIncidentSeverity(e.target.value as any)}
+                  onChange={(e) => setIncidentSeverity(e.target.value as 'warning' | 'critical' | 'neutral')}
                   className="w-full px-3 py-2 border border-outline-variant text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-none bg-surface-container-low text-on-surface"
                 >
                   <option value="warning">🟠 Warning (Minor/Mild)</option>

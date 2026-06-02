@@ -8,18 +8,12 @@ import {
   Calendar,
   Check,
   MoreHorizontal,
-  MessageSquare,
   Send,
   Plus,
   ChevronRight,
-  Filter,
   Download,
-  AlertCircle,
   X,
-  FileText,
-  MessageCircle,
-  HelpCircle,
-  Eye
+  MessageCircle
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -719,7 +713,7 @@ export default function ExecutiveDashboard() {
                   </label>
                   <select
                     value={newTaskPriority}
-                    onChange={(e) => setNewTaskPriority(e.target.value as any)}
+                    onChange={(e) => setNewTaskPriority(e.target.value as 'critical' | 'high' | 'medium' | 'low')}
                     className="w-full px-3 py-2 bg-surface-container-low border border-outline-variant text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-none text-on-surface"
                   >
                     <option value="critical">🔴 Critical</option>
