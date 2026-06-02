@@ -30,7 +30,7 @@ export async function AdaptiveSidebar() {
     { name: 'Dashboard', href: dashboardHref, iconName: 'Dashboard' },
     { name: 'Work', href: '/work', iconName: 'Work' },
     { name: 'Team', href: '/team', iconName: 'People' },
-    { name: 'Trips', href: '/owner/trips', iconName: 'Trips' },
+    { name: 'Trips', href: '/trips', iconName: 'Trips' },
     { name: 'Settings', href: '/owner/settings', iconName: 'Settings' },
   ];
 
