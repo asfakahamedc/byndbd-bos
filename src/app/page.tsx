@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getCurrentUser } from '@/actions/auth';
 import { redirect } from 'next/navigation';
 
@@ -71,5 +73,3 @@ export default async function Home() {
 
   redirect(redirectPath);
 }
-
-export const dynamic = "force-dynamic";

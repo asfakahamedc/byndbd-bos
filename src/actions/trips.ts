@@ -28,6 +28,7 @@ export interface Trip {
  */
 export async function getTrips(): Promise<Trip[]> {
   const supabase = createBOSClient();
+  if (!supabase) return [];
 
   try {
     const { data, error } = await supabase
@@ -93,6 +94,7 @@ export async function createTrip(
 
     // ── 4. Insert via BOS Client (RLS-scoped) ────────────────────────────────
     const supabase = createBOSClient();
+  if (!supabase) return { success: false, error: "Supabase not initialized" };
 
     const { error } = await supabase.from('trips').insert({
       booking_ref,

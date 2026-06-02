@@ -10,6 +10,7 @@ import { getCurrentUser } from './auth';
  */
 export async function getTasks() {
   const supabase = createBOSClient();
+  if (!supabase) return null;
 
   try {
     const { data, error } = await supabase
@@ -35,6 +36,7 @@ export async function getTasks() {
  */
 export async function updateTaskStatus(taskId: string, status: string) {
   const supabase = createBOSClient();
+  if (!supabase) return null;
 
   try {
     const { error } = await supabase
@@ -63,6 +65,7 @@ export async function updateTaskStatus(taskId: string, status: string) {
  */
 export async function getProjects() {
   const supabase = createBOSClient();
+  if (!supabase) return null;
 
   try {
     const { data, error } = await supabase
@@ -87,6 +90,7 @@ export async function getProjects() {
  */
 export async function createProject(data: Record<string, unknown>) {
   const supabase = createBOSClient();
+  if (!supabase) return null;
 
   try {
     const user = await getCurrentUser();
@@ -122,6 +126,7 @@ export async function createProject(data: Record<string, unknown>) {
  */
 export async function createTask(data: Record<string, unknown>) {
   const supabase = createBOSClient();
+  if (!supabase) return null;
 
   try {
     const user = await getCurrentUser();

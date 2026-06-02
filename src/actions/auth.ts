@@ -10,15 +10,8 @@ import { BOSUser } from '@/lib/types/auth';
  */
 export async function getCurrentUser(): Promise<BOSUser | null> {
   try {
-    // Check for missing or malformed Supabase environment variables on Vercel
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.includes('"') || supabaseAnonKey.includes('"')) {
-      throw new Error("Missing or malformed Supabase Environment Variables on Vercel.");
-    }
-
     const supabase = createBOSClient();
+    if (!supabase) return null;
 
     // 1. Retrieve the authenticated user session
     const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -64,7 +57,9 @@ export async function getCurrentUser(): Promise<BOSUser | null> {
  */
 export async function signOut() {
   const supabase = createBOSClient();
-  await supabase.auth.signOut();
+  if (supabase) {
+    await supabase.auth.signOut();
+  }
   redirect('/login');
 }
 
@@ -80,6 +75,9 @@ export async function signIn(formData: FormData) {
   }
 
   const supabase = createBOSClient();
+  if (!supabase) {
+    return { error: 'Supabase client initialization failed' };
+  }
 
   const { error } = await supabase.auth.signInWithPassword({
     email,

@@ -24,6 +24,7 @@ export interface TeamMember {
  */
 export async function getTeamMembers(): Promise<TeamMember[]> {
   const supabase = createBOSClient();
+  if (!supabase) return [];
 
   try {
     const { data, error } = await supabase

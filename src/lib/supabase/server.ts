@@ -7,6 +7,14 @@ import { cookies } from 'next/headers';
  * This client is subject to Row Level Security (RLS) rules.
  */
 export function createBOSClient() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    if (process.env.NODE_ENV === 'production' && typeof window === 'undefined') {
+      console.warn("BOS Warning: Supabase credentials are missing during static generation. Skipping client initialization.");
+      return null;
+    }
+    throw new Error("Missing or malformed Supabase Environment Variables.");
+  }
+
   const cookieStore = cookies();
 
   return createServerClient(

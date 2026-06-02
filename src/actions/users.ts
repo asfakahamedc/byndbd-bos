@@ -7,6 +7,7 @@ import { createBOSClient } from '@/lib/supabase/server';
  */
 export async function getUsers() {
   const supabase = createBOSClient();
+  if (!supabase) return [];
 
   try {
     const { data, error } = await supabase

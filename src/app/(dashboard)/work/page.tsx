@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import React from 'react';
 import { ProjectCard } from '@/components/work/project-card';
 import { TaskList, Task } from '@/components/work/task-list';
