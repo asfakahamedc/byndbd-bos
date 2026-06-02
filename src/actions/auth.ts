@@ -9,9 +9,17 @@ import { BOSUser } from '@/lib/types/auth';
  * Connects the auth.getUser() with the public.users database profile.
  */
 export async function getCurrentUser(): Promise<BOSUser | null> {
-  const supabase = createBOSClient();
-
   try {
+    // Check for missing or malformed Supabase environment variables on Vercel
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.includes('"') || supabaseAnonKey.includes('"')) {
+      throw new Error("Missing or malformed Supabase Environment Variables on Vercel.");
+    }
+
+    const supabase = createBOSClient();
+
     // 1. Retrieve the authenticated user session
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) {
@@ -25,8 +33,12 @@ export async function getCurrentUser(): Promise<BOSUser | null> {
       .eq('id', user.id)
       .single();
 
-    if (dbError || !profile) {
-      console.warn(`No database profile found for auth user ID: ${user.id}`, dbError);
+    if (dbError) {
+      throw dbError;
+    }
+
+    if (!profile) {
+      console.warn(`No database profile found for auth user ID: ${user.id}`);
       return null;
     }
 
@@ -42,7 +54,7 @@ export async function getCurrentUser(): Promise<BOSUser | null> {
     };
   } catch (error) {
     console.error('Unhandled error resolving current user profile:', error);
-    return null;
+    throw error;
   }
 }
 
