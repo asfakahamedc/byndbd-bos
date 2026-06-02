@@ -2,6 +2,8 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
+import ClassBTimer from '@/components/dashboards/class-b-timer';
+import ClassCModal from '@/components/dashboards/class-c-modal';
 import { 
   Calendar, 
   CalendarDays, 
@@ -16,7 +18,6 @@ import {
   ChevronRight, 
   Rocket, 
   Megaphone, 
-  Timer, 
   Mountain 
 } from 'lucide-react';
 
@@ -57,26 +58,7 @@ const ACTIVE_PROJECTS = [
   { id: 'proj-2', name: 'Website Redesign', progress: 40, statusText: '40% in progress', isSuccess: false }
 ];
 
-const ESCALATIONS = [
-  {
-    id: 'esc-1',
-    classification: 'Class B Action',
-    title: 'Budget reallocation',
-    timeLimit: '8 mins left',
-    description: "Over-budget alert for 'Sajek Valley Retreat' logistics.",
-    actionType: 'approve_review',
-    severity: 'error'
-  },
-  {
-    id: 'esc-2',
-    classification: 'Class C Action',
-    title: 'Hire new Host',
-    timeLimit: 'Awaiting confirmation',
-    description: 'Final interview summary for Rahim Ali available.',
-    actionType: 'view_profile',
-    severity: 'secondary'
-  }
-];
+
 
 const SYSTEM_HEALTH = {
   status: '100% Online',
@@ -281,38 +263,19 @@ export default function OwnerDashboard() {
               </h4>
             </div>
             <div className="p-lg space-y-md">
-              {ESCALATIONS.map((esc) => (
-                <div 
-                  key={esc.id} 
-                  className="flex items-start gap-4 p-lg border border-outline-variant bg-surface relative"
-                >
-                  <div className={`w-2 h-full absolute left-0 top-0 ${esc.severity === 'error' ? 'bg-error' : 'bg-secondary'}`} />
-                  <div className="pl-2 flex-1">
-                    <div className="flex justify-between items-start mb-1">
-                      <h6 className="text-label font-bold">{esc.classification}: {esc.title}</h6>
-                      <span className={`${esc.severity === 'error' ? 'text-error' : 'text-secondary'} font-mono text-[12px] flex items-center gap-1`}>
-                        <Timer className="w-3.5 h-3.5" />
-                        {esc.timeLimit}
-                      </span>
-                    </div>
-                    <p className="text-[12px] text-on-surface-variant mb-md">{esc.description}</p>
-                    {esc.actionType === 'approve_review' ? (
-                      <div className="flex gap-2">
-                        <button className="bg-primary text-on-primary px-lg py-1.5 rounded-lg text-label font-bold hover:opacity-90 transition-opacity">
-                          Approve
-                        </button>
-                        <button className="border border-outline-variant px-lg py-1.5 rounded-lg text-label font-bold hover:bg-surface-container-low transition-colors">
-                          Review
-                        </button>
-                      </div>
-                    ) : (
-                      <button className="bg-secondary-container text-on-secondary-container px-lg py-1.5 rounded-lg text-label font-bold hover:opacity-90 transition-opacity">
-                        View Profile
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))}
+              <ClassBTimer 
+                actionTitle="Budget reallocation"
+                initiatedBy="Sajek Valley Retreat logistics"
+                amount="BDT 80,000"
+                description="Over-budget alert for Sajek Valley Retreat logistics."
+              />
+
+              <ClassCModal 
+                actionType="Class C Action: Hire new Host"
+                description="Final interview summary for Rahim Ali available."
+                coFounderAStatus="confirmed"
+                coFounderBStatus="pending"
+              />
             </div>
           </Card>
         </div>
