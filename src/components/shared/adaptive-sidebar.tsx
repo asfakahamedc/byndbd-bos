@@ -21,7 +21,13 @@ export function AdaptiveSidebar() {
   const pathname = usePathname();
 
   const isCeoContext = pathname?.startsWith('/ceo');
-  const dashboardHref = isCeoContext ? '/ceo' : '/owner';
+  const isOperationsContext = pathname?.startsWith('/operations');
+
+  const dashboardHref = isOperationsContext 
+    ? '/operations' 
+    : isCeoContext 
+      ? '/ceo' 
+      : '/owner';
 
   const navItems = [
     { name: 'Dashboard', href: dashboardHref, icon: LayoutDashboard },
@@ -42,7 +48,7 @@ export function AdaptiveSidebar() {
         {navItems.map((item) => {
           const Icon = item.icon;
           // Matches exact path or is a sub-path of the item href
-          const isActive = pathname === item.href || (item.href !== '/owner' && item.href !== '/ceo' && pathname?.startsWith(item.href));
+          const isActive = pathname === item.href || (item.href !== '/owner' && item.href !== '/ceo' && item.href !== '/operations' && pathname?.startsWith(item.href));
 
           return (
             <Link
@@ -64,7 +70,23 @@ export function AdaptiveSidebar() {
 
       <div className="p-6 mt-auto border-t border-white/10">
         <div className="flex items-center gap-3">
-          {isCeoContext ? (
+          {isOperationsContext ? (
+            <>
+              <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center overflow-hidden relative shrink-0 border border-white/10">
+                <Image
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDXJ6Hye1WeVPQ26Nbs2WfascJBsUrmpXp8wlgvPxZ7aXRijp_GrHuoInaIKM3euAhsZqu8zCuQEOXOqdQuWDErNzuor97cRSKMjnWCmV3yV81DP7cg96o4cOvPgkTOo4_yNZh95yiSQwfLpchAbkbox6Gj7TVGO5k2qFzQOkvpqfhy9S1uOl3eyJpVCS4fUZb4aMWIhNQY_TfMraCwaW1sOkJFsZji5kpN5dXrc2z9OKx4FqVyzZqVfxOAd2dvfZn85ErSOfkM-Fs"
+                  alt="Ops Lead"
+                  width={40}
+                  height={40}
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-body text-white font-bold leading-none">Ops Lead</p>
+                <p className="text-[10px] text-[#9CA3AF] leading-tight uppercase tracking-wider mt-1">Internal Access</p>
+              </div>
+            </>
+          ) : isCeoContext ? (
             <>
               <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center overflow-hidden relative shrink-0">
                 <Image
