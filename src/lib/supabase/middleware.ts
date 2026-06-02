@@ -9,6 +9,11 @@ import { NextResponse, type NextRequest } from 'next/server';
  * @returns An object containing the updated NextResponse and the authenticated User object (if any).
  */
 export async function updateSession(request: NextRequest) {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    console.warn("BOS WARNING: Supabase keys are missing. Bypassing middleware session update to prevent CDN crash.");
+    return { response: NextResponse.next({ request }), user: null };
+  }
+
   // Create an initial response
   let response = NextResponse.next({
     request: {
