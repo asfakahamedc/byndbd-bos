@@ -67,10 +67,7 @@ function getEscalationLevel(hoursOverdue: number): (typeof SLA_LEVELS)[number] {
 
 export async function GET(request: NextRequest) {
   // ── 1. Security Gate: validate CRON_SECRET bearer token ───────────────────
-  const authHeader = request.headers.get('authorization');
-  const cronSecret = process.env.CRON_SECRET;
-
-  if (!cronSecret) {
+  if (!process.env.CRON_SECRET) {
     console.error('[Escalation Engine] CRON_SECRET environment variable is not set.');
     return NextResponse.json(
       { error: 'Cron secret is not configured on this server.' },
@@ -78,7 +75,7 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  if (!authHeader || authHeader !== `Bearer ${cronSecret}`) {
+  if (request.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
     console.warn('[Escalation Engine] Unauthorized cron invocation attempt.');
     return NextResponse.json(
       { error: 'Unauthorized. Valid Authorization: Bearer <CRON_SECRET> header required.' },
