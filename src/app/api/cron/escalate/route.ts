@@ -214,7 +214,7 @@ export async function GET(request: NextRequest) {
         };
 
         // Silently swallow audit failures — they should not block cron processing
-        await admin.from('audit_log').insert(auditPayload).then(({ error }) => {
+        await admin.from('audit_log').insert(auditPayload).then(({ error }: { error: any }) => {
           if (error) {
             console.warn(`[Escalation Engine] Audit log write failed for task ${task.id}:`, error);
           }

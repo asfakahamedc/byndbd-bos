@@ -677,3 +677,5 @@ export default function CEODashboard() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

@@ -784,3 +784,5 @@ export default function HostDashboard() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

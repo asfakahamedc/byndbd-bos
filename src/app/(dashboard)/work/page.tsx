@@ -210,3 +210,5 @@ export default async function WorkManagementPage() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

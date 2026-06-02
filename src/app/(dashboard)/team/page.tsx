@@ -100,3 +100,5 @@ export default async function TeamDirectoryPage() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

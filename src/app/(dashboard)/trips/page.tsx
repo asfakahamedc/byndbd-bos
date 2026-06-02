@@ -108,3 +108,5 @@ export default async function TripsManagementPage() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

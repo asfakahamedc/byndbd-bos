@@ -820,3 +820,5 @@ export default function ExecutiveDashboard() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

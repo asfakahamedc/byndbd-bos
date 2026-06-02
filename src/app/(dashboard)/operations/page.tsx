@@ -618,3 +618,5 @@ function CheckSquare2(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export const dynamic = 'force-dynamic';

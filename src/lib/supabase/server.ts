@@ -7,18 +7,31 @@ import { cookies } from 'next/headers';
  * This client is subject to Row Level Security (RLS) rules.
  */
 export function createBOSClient() {
-  const cookieStore = cookies();
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    if (typeof window === 'undefined') {
+      console.warn("BOS Build Guard: Supabase keys are missing during compilation. Returning null client.");
+      return new Proxy({}, {
+        get: () => () => Promise.resolve({ data: null, error: null })
+      }) as any;
+    }
+    throw new Error("Missing Supabase Environment Keys.");
+  }
 
   return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
-        getAll() {
+        async getAll() {
+          const cookieStore = await cookies();
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet) {
+        async setAll(cookiesToSet) {
           try {
+            const cookieStore = await cookies();
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options)
             );
@@ -44,18 +57,31 @@ export function createBOSClient() {
  * - Under no circumstances should this be utilized for typical user-facing operations or flows.
  */
 export function createBOSAdmin() {
-  const cookieStore = cookies();
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    if (typeof window === 'undefined') {
+      console.warn("BOS Build Guard: Supabase admin keys are missing during compilation. Returning null client.");
+      return new Proxy({}, {
+        get: () => () => Promise.resolve({ data: null, error: null })
+      }) as any;
+    }
+    throw new Error("Missing Supabase Environment Keys.");
+  }
 
   return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    supabaseUrl,
+    serviceRoleKey,
     {
       cookies: {
-        getAll() {
+        async getAll() {
+          const cookieStore = await cookies();
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet) {
+        async setAll(cookiesToSet) {
           try {
+            const cookieStore = await cookies();
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options)
             );

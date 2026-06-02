@@ -53,8 +53,8 @@ export async function getCurrentUser(): Promise<BOSUser | null> {
       two_fa_enabled: !!profile.two_fa_enabled,
     };
   } catch (error) {
-    console.error('Unhandled error resolving current user profile:', error);
-    throw error;
+    console.warn('Unhandled error resolving current user profile:', error);
+    return null;
   }
 }
 

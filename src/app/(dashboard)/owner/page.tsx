@@ -318,3 +318,5 @@ export default function OwnerDashboard() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

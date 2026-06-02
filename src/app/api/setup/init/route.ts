@@ -50,7 +50,7 @@ async function handleInit(request: NextRequest) {
       },
     ];
 
-    const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || request.ip || '127.0.0.1';
+    const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || '127.0.0.1';
     const userAgent = request.headers.get('user-agent') || 'system-seeder';
 
     const createdUsers = [];

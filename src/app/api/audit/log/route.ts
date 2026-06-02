@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     const validatedData = auditLogSchema.parse(body);
 
     // Extract IP address and User-Agent headers
-    const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || request.ip || 'unknown';
+    const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown';
     const userAgent = request.headers.get('user-agent') || 'unknown';
 
     // Initialize the admin client to bypass Row Level Security
