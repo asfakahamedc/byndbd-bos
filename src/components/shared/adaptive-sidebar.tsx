@@ -29,8 +29,8 @@ export async function AdaptiveSidebar() {
   const navItems: NavItem[] = [
     { name: 'Dashboard', href: dashboardHref, iconName: 'Dashboard' },
     { name: 'Work', href: '/work', iconName: 'Work' },
+    { name: 'Team', href: '/team', iconName: 'People' },
     { name: 'Trips', href: '/owner/trips', iconName: 'Trips' },
-    { name: 'People', href: '/owner/people', iconName: 'People' },
     { name: 'Settings', href: '/owner/settings', iconName: 'Settings' },
   ];
 
