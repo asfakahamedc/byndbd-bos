@@ -155,7 +155,6 @@ export default function LoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="current-password"
                   disabled={isPending}
-                  defaultValue="ByndBD_Admin2@26#"
                 />
                 <button
                   className="absolute right-3 flex items-center text-outline hover:text-on-surface transition-colors"

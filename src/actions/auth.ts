@@ -31,15 +31,25 @@ export async function getCurrentUser(): Promise<BOSUser | null> {
       .from('users')
       .select('layer, department, full_name, status, two_fa_enabled')
       .eq('id', user.id)
-      .single();
+      .maybeSingle();
 
     if (dbError) {
-      throw dbError;
+      console.error("Database error fetching user profile:", dbError);
+      return null;
     }
 
     if (!profile) {
-      console.warn(`No database profile found for auth user ID: ${user.id}`);
-      return null;
+      console.warn(`User ${user.id} has no public.users row. Providing a safe default structure.`);
+      return {
+        id: user.id,
+        email: user.email || '',
+        full_name: 'Guest User',
+        layer: 6,
+        department: null,
+        status: 'active',
+        two_fa_enabled: false,
+        role: 'Guest'
+      } as any;
     }
 
     // 3. Return the fully resolved custom BOSUser profile
