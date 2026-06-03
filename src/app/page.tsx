@@ -47,6 +47,33 @@ export default async function Home() {
     redirect('/login');
   }
 
+  if ((user as any).role === 'Guest' || user.layer > 5) {
+    return (
+      <main className="flex min-h-screen items-center justify-center p-4 bg-[#FAF9F2] font-sans">
+        <div className="w-full max-w-md bg-white border border-[#E0E0E0] rounded-lg shadow-sm p-8 text-center space-y-6">
+          <div className="w-16 h-16 bg-[#FF5F0F]/10 rounded-full flex items-center justify-center mx-auto">
+            <span className="material-symbols-outlined text-[#FF5F0F] text-[32px]">pending_actions</span>
+          </div>
+          <div className="space-y-2">
+            <h1 className="text-xl text-[#1D1D1B] font-poppins font-bold">Account Pending</h1>
+            <p className="text-sm text-[#555555] font-ubuntu">
+              Your account is successfully authenticated, but has not yet been assigned a workspace role.
+            </p>
+          </div>
+          <div className="p-4 bg-[#FAF9F2] border border-[#E0E0E0] rounded-[6px] text-left">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#1D1D1B] mb-1">
+              <span className="material-symbols-outlined text-[18px] text-[#FF5F0F]">info</span>
+              <span>Next Steps:</span>
+            </div>
+            <p className="text-xs text-[#555555] font-ubuntu leading-relaxed">
+              Please contact your system administrator to assign your organizational layer and department. Once assigned, you will automatically access your dashboard upon refreshing.
+            </p>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   let redirectPath = '/login';
   switch (user.layer) {
     case 0:

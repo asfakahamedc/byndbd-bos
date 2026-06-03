@@ -100,30 +100,6 @@ export async function signIn(formData: FormData) {
     return { error: error.message };
   }
 
-  const user = await getCurrentUser();
-
-  let redirectPath = '/login';
-  switch (user?.layer) {
-    case 0:
-      redirectPath = '/owner';
-      break;
-    case 1:
-    case 2:
-      redirectPath = '/ceo';
-      break;
-    case 3:
-      redirectPath = '/operations';
-      break;
-    case 4:
-      redirectPath = '/executive';
-      break;
-    case 5:
-      redirectPath = '/host';
-      break;
-    default:
-      redirectPath = '/login';
-  }
-
-  redirect(redirectPath);
+  redirect('/');
 }
 
