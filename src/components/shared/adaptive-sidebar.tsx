@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { getCurrentUser, signOut } from '@/actions/auth';
 import { SidebarLinks, NavItem } from './sidebar-links';
 import { Icon } from '../ui/icon';
@@ -73,7 +74,7 @@ export async function AdaptiveSidebar() {
     <aside className="fixed left-0 top-0 h-full w-[240px] bg-dusk flex flex-col z-50 border-r border-[#FAF9F2]/10">
       {/* Official Bynd BD Horizontal Lockup Logo */}
       <div className="p-6 flex items-center gap-3 border-b border-[#FAF9F2]/10">
-        <img src="/color_logo.svg" className="w-8 h-8 filter brightness-110" alt="Bynd BD Logo" />
+        <Image src="/black_logo.svg" width={32} height={32} className="object-contain" alt="Bynd BD Logo" />
         <div className="flex flex-col">
           <span className="font-poppins font-black text-sm text-[#FAF9F2] uppercase tracking-[0.05em] leading-none">BYND BD</span>
           <span className="text-[10px] font-poppins font-bold text-sunrise tracking-[0.1em] uppercase mt-1 leading-none">BOS</span>

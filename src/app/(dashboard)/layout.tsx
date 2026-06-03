@@ -17,14 +17,20 @@ export default function DashboardLayout({
       <div className="flex flex-col min-h-screen">
         {/* Top AppBar Shell */}
         <header className="flex justify-between items-center h-[64px] pl-[240px] pr-lg w-full bg-white border-b border-[#E0E0E0] sticky top-0 z-40 shadow-sm">
-          {/* Search Bar */}
-          <div className="flex items-center bg-[#F5F5F5] px-md py-1.5 rounded-[6px] border border-[#E0E0E0] w-96 ml-lg focus-within:border-sunrise focus-within:ring-2 focus-within:ring-sunrise transition-all">
-            <Icon name="search" size={20} color="#555555" />
-            <input
-              type="text"
-              placeholder="Search operations, trips, or staff..."
-              className="bg-transparent border-none focus:ring-0 text-sm font-ubuntu w-full ml-2 text-dusk focus:outline-none"
-            />
+          {/* Brand Logo & Search Bar */}
+          <div className="flex items-center gap-md ml-lg">
+            <div className="flex items-center gap-2 mr-2">
+              <Image src="/color_logo.svg" alt="Bynd BD Logo" width={28} height={28} className="object-contain" />
+              <span className="font-poppins font-bold text-sm text-dusk uppercase tracking-wider">BOS</span>
+            </div>
+            <div className="flex items-center bg-[#F5F5F5] px-md py-1.5 rounded-[6px] border border-[#E0E0E0] w-80 focus-within:border-sunrise focus-within:ring-2 focus-within:ring-sunrise transition-all">
+              <Icon name="search" size={20} color="#555555" />
+              <input
+                type="text"
+                placeholder="Search operations, trips, or staff..."
+                className="bg-transparent border-none focus:ring-0 text-sm font-ubuntu w-full ml-2 text-dusk focus:outline-none"
+              />
+            </div>
           </div>
 
           {/* Action Buttons & Profile */}

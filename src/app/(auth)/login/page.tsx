@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useTransition } from 'react';
+import Image from 'next/image';
 import { signIn } from '@/actions/auth';
 
 export default function LoginPage() {
@@ -29,7 +30,7 @@ export default function LoginPage() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen font-sans">
       {/* Left Side: Sidebar Brand & Marketing (Hidden on Mobile) */}
-      <section className="hidden md:flex flex-col justify-between p-xl bg-inverse-surface text-white relative overflow-hidden">
+      <section className="hidden md:flex flex-col justify-between p-xl bg-dusk text-white relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-[-10%] right-[-10%] w-96 h-96 rounded-full border-[1px] border-white/20"></div>
@@ -39,9 +40,7 @@ export default function LoginPage() {
         <div className="relative z-10 space-y-xxl">
           {/* Brand Logo */}
           <div className="flex items-center gap-sm">
-            <div className="w-12 h-12 bg-white flex items-center justify-center rounded-[6px] shadow-lg">
-              <span className="material-symbols-outlined text-sunrise text-[32px] font-fill">hub</span>
-            </div>
+            <Image src="/black_logo.svg" alt="Bynd BD Logo" width={48} height={48} className="object-contain" />
             <span className="font-sans text-[48px] font-semibold tracking-tighter text-white">Bynd BD</span>
           </div>
 
@@ -90,9 +89,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md space-y-xl">
           {/* Header (Mobile Only Logo) */}
           <div className="md:hidden flex flex-col items-center mb-xl">
-            <div className="w-14 h-14 bg-sunrise flex items-center justify-center rounded-[6px] shadow-md mb-md">
-              <span className="material-symbols-outlined text-white text-[36px] font-fill">hub</span>
-            </div>
+            <Image src="/color_logo.svg" alt="Bynd BD Logo" width={56} height={56} className="object-contain mb-md" />
             <h2 className="font-sans text-h1 text-sunrise">Bynd BD</h2>
           </div>
 
@@ -158,6 +155,7 @@ export default function LoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="current-password"
                   disabled={isPending}
+                  defaultValue="ByndBD_Admin2@26#"
                 />
                 <button
                   className="absolute right-3 flex items-center text-outline hover:text-on-surface transition-colors"
