@@ -13,7 +13,7 @@ export function Card({ children, className, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        "card-elevation bg-white border border-outline-variant rounded-none",
+        "bg-white border border-[#E0E0E0] rounded-lg shadow-sm transition-all duration-200 hover:shadow-md",
         className
       )}
       {...props}

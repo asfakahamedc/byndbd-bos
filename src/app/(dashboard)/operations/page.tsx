@@ -4,20 +4,7 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
-import { 
-  Clock, 
-  AlertTriangle, 
-  CheckCircle, 
-  CheckCircle2,
-  Users, 
-  GitBranch, 
-  Heart, 
-  Shield, 
-  Ban, 
-  FileText, 
-  Plus, 
-  AlertCircle
-} from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
 // ============================================================================
@@ -180,11 +167,11 @@ export default function OperationsDashboard() {
       <section className="flex flex-col md:flex-row md:items-end justify-between gap-sm">
         <div className="space-y-sm">
           <div className="flex items-center gap-3">
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider">
+            <span className="bg-sunrise/10 text-sunrise px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider">
               Operations
             </span>
             <span className="text-on-surface-variant text-label font-bold flex items-center gap-1">
-              <Users className="w-4 h-4 text-on-surface-variant" />
+              <Icon name="groups" className="w-4 h-4 text-on-surface-variant" />
               {DEPARTMENT_STATS.teamMembersCount} members
             </span>
           </div>
@@ -193,15 +180,15 @@ export default function OperationsDashboard() {
         
         <div className="flex gap-sm">
           {/* Filters Toggles */}
-          <div className="flex bg-surface-container-low border border-outline-variant p-1 gap-1">
+          <div className="flex bg-surface-container-low border border-[#E0E0E0] p-1 gap-1">
             {(['team', 'tasks', 'deadlines'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setFilter(tab)}
                 className={cn(
-                  "px-3 py-1.5 text-label font-bold transition-all uppercase rounded-none",
+                  "px-3 py-1.5 text-label font-bold transition-all uppercase rounded-[6px]",
                   filter === tab
-                    ? "bg-primary text-on-primary font-bold shadow-sm"
+                    ? "bg-sunrise text-white font-bold shadow-sm"
                     : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/40"
                 )}
               >
@@ -210,12 +197,12 @@ export default function OperationsDashboard() {
             ))}
           </div>
 
-          <button className="h-10 flex items-center gap-2 bg-white border border-outline px-4 rounded-none text-label font-bold hover:bg-slate-50 transition-colors">
-            <Users className="w-4 h-4" />
+          <button className="h-10 flex items-center gap-2 bg-white border border-outline px-4 rounded-[6px] text-label font-bold hover:bg-slate-50 transition-colors">
+            <Icon name="groups" className="w-4 h-4" />
             View Team
           </button>
-          <button className="h-10 flex items-center gap-2 bg-primary text-on-primary px-4 rounded-none text-label font-bold hover:opacity-90 transition-opacity">
-            <Plus className="w-4 h-4" />
+          <button className="h-10 flex items-center gap-2 bg-sunrise text-white px-4 rounded-[6px] text-label font-bold hover:opacity-90 transition-opacity">
+            <Icon name="add" className="w-4 h-4" />
             Add Task
           </button>
         </div>
@@ -229,7 +216,7 @@ export default function OperationsDashboard() {
           <section className="grid grid-cols-1 md:grid-cols-4 gap-sm">
             <Card className="p-lg flex items-center gap-4 h-24">
               <div className="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 shrink-0">
-                <Clock className="w-6 h-6" />
+                <Icon name="schedule" className="w-6 h-6" />
               </div>
               <div>
                 <p className="text-label font-bold text-on-surface-variant uppercase tracking-wider">Due Today</p>
@@ -240,8 +227,8 @@ export default function OperationsDashboard() {
             </Card>
 
             <Card className="p-lg flex items-center gap-4 h-24 border-l-4 border-l-error">
-              <div className="w-12 h-12 rounded-full bg-error/5 flex items-center justify-center text-error shrink-0">
-                <AlertTriangle className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-full bg-ember/5 flex items-center justify-center text-error shrink-0">
+                <Icon name="warning" className="w-6 h-6" />
               </div>
               <div>
                 <p className="text-label font-bold text-on-surface-variant uppercase tracking-wider">Overdue</p>
@@ -256,15 +243,15 @@ export default function OperationsDashboard() {
                 <p className="text-label font-bold text-on-surface-variant uppercase tracking-wider">This Week</p>
                 <span className="text-xs font-bold text-on-surface">{tasks.length} items</span>
               </div>
-              <div className="w-full bg-outline-variant/30 h-2 rounded-none overflow-hidden border border-outline-variant/10">
-                <div className="bg-primary h-full rounded-none" style={{ width: `${thisWeekProgressPercent}%` }}></div>
+              <div className="w-full bg-outline-variant/30 h-2 rounded-[6px] overflow-hidden border border-[#E0E0E0]/10">
+                <div className="bg-sunrise h-full rounded-[6px]" style={{ width: `${thisWeekProgressPercent}%` }}></div>
               </div>
               <p className="text-[10px] font-bold text-on-surface-variant uppercase">{thisWeekProgressPercent}% Progress</p>
             </Card>
 
             <Card className="p-lg flex items-center gap-4 h-24 border-l-4 border-l-success">
               <div className="w-12 h-12 rounded-full bg-success/10 flex items-center justify-center text-success shrink-0">
-                <CheckCircle2 className="w-6 h-6" />
+                <Icon name="check_circle" className="w-6 h-6" />
               </div>
               <div>
                 <p className="text-label font-bold text-on-surface-variant uppercase tracking-wider">On Time Rate</p>
@@ -282,7 +269,7 @@ export default function OperationsDashboard() {
                   My Approvals
                 </h3>
                 {approvals.length > 0 && (
-                  <span className="bg-error text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+                  <span className="bg-ember text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
                     {approvals.length} PENDING
                   </span>
                 )}
@@ -291,7 +278,7 @@ export default function OperationsDashboard() {
               <div className="space-y-sm">
                 {approvals.length === 0 ? (
                   <Card className="p-lg text-center">
-                    <CheckCircle className="w-10 h-10 text-success mx-auto mb-2" />
+                    <Icon name="check_circle" size={40} color="#2E7D32" className="mx-auto mb-2" />
                     <p className="text-xs font-bold text-success">All approvals completed!</p>
                   </Card>
                 ) : (
@@ -299,7 +286,7 @@ export default function OperationsDashboard() {
                     <Card key={app.id} className="p-lg flex flex-col justify-between hover:shadow-md transition-shadow">
                       <div className="flex items-start justify-between mb-4 w-full">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-none overflow-hidden relative shrink-0 border border-outline-variant/30">
+                          <div className="w-10 h-10 rounded-[6px] overflow-hidden relative shrink-0 border border-[#E0E0E0]/30">
                             <Image
                               src={app.requesterAvatar}
                               alt={app.requesterName}
@@ -315,9 +302,9 @@ export default function OperationsDashboard() {
                         </div>
                         
                         {app.type === 'expense' ? (
-                          <span className="text-body font-bold text-primary shrink-0">{app.amount}</span>
+                          <span className="text-body font-bold text-sunrise shrink-0">{app.amount}</span>
                         ) : (
-                          <FileText className="w-5 h-5 text-on-surface-variant shrink-0" />
+                          <Icon name="description" size={20} color="#555555" className="shrink-0" />
                         )}
                       </div>
 
@@ -328,13 +315,13 @@ export default function OperationsDashboard() {
                       <div className="grid grid-cols-2 gap-2 w-full pt-1">
                         <button 
                           onClick={() => handleReject(app.id, app.title, app.requesterName)}
-                          className="h-9 bg-white border border-error text-error text-[11px] font-bold rounded-none hover:bg-error/5 transition-all"
+                          className="h-9 bg-white border border-error text-error text-[11px] font-bold rounded-[6px] hover:bg-ember/5 transition-all"
                         >
                           Reject
                         </button>
                         <button 
                           onClick={() => handleApprove(app.id, app.title, app.requesterName)}
-                          className="h-9 bg-primary text-on-primary text-[11px] font-bold rounded-none hover:bg-blue-700 transition-all"
+                          className="h-9 bg-sunrise text-white text-[11px] font-bold rounded-[6px] hover:bg-blue-700 transition-all"
                         >
                           Approve
                         </button>
@@ -354,7 +341,7 @@ export default function OperationsDashboard() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-sm">
                 {/* Team Members */}
                 <Card className="p-lg flex flex-col justify-between aspect-square">
-                  <Users className="w-6 h-6 text-primary" />
+                  <Icon name="groups" className="w-6 h-6 text-sunrise" />
                   <div>
                     <p className="text-display font-extrabold leading-none">{DEPARTMENT_STATS.teamMembersCount}</p>
                     <p className="text-label font-bold text-on-surface-variant mt-2 uppercase tracking-wider">Team Members</p>
@@ -363,7 +350,7 @@ export default function OperationsDashboard() {
 
                 {/* Active Projects */}
                 <Card className="p-lg flex flex-col justify-between aspect-square">
-                  <GitBranch className="w-6 h-6 text-primary" />
+                  <Icon name="account_tree" size={24} color="#FF5F0F" />
                   <div>
                     <p className="text-display font-extrabold leading-none">{DEPARTMENT_STATS.activeProjectsCount}</p>
                     <p className="text-label font-bold text-on-surface-variant mt-2 uppercase tracking-wider">Projects Active</p>
@@ -382,7 +369,7 @@ export default function OperationsDashboard() {
                         strokeWidth="3.5"
                       />
                       <path 
-                        className="text-primary" 
+                        className="text-sunrise" 
                         d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
                         fill="none" 
                         stroke="currentColor" 
@@ -406,17 +393,17 @@ export default function OperationsDashboard() {
                 </Card>
 
                 {/* Team Health Score */}
-                <Card className="p-lg flex flex-col justify-between aspect-square bg-primary/5 border border-primary/10">
-                  <Heart className="w-6 h-6 text-primary fill-primary/10" />
+                <Card className="p-lg flex flex-col justify-between aspect-square bg-sunrise/5 border border-sunrise/10">
+                  <Icon name="favorite" size={24} color="#FF5F0F" />
                   <div>
-                    <p className="text-display font-extrabold leading-none text-primary">{DEPARTMENT_STATS.teamHealthScore}</p>
-                    <p className="text-label font-bold text-primary mt-2 uppercase tracking-wider">Team Health Score</p>
+                    <p className="text-display font-extrabold leading-none text-sunrise">{DEPARTMENT_STATS.teamHealthScore}</p>
+                    <p className="text-label font-bold text-sunrise mt-2 uppercase tracking-wider">Team Health Score</p>
                   </div>
                 </Card>
 
                 {/* Risk Status */}
                 <Card className="p-lg flex flex-col justify-between aspect-square">
-                  <Shield className="w-6 h-6 text-success" />
+                  <Icon name="security" className="w-6 h-6 text-success" />
                   <div>
                     <p className="text-h1 font-extrabold text-success leading-none">{DEPARTMENT_STATS.riskStatus}</p>
                     <p className="text-label font-bold text-on-surface-variant mt-2 uppercase tracking-wider">Risk Status</p>
@@ -425,7 +412,7 @@ export default function OperationsDashboard() {
 
                 {/* Active Blockers */}
                 <Card className="p-lg flex flex-col justify-between aspect-square">
-                  <Ban className="w-6 h-6 text-on-surface-variant/40" />
+                  <Icon name="block" size={24} color="#9E9E9E" />
                   <div>
                     <p className="text-display font-extrabold leading-none text-on-surface-variant/60">
                       {DEPARTMENT_STATS.activeBlockersCount}
@@ -443,26 +430,26 @@ export default function OperationsDashboard() {
               <h3 className="text-h3 font-bold text-on-surface flex items-center gap-2">
                 Recent Activity
               </h3>
-              <button className="text-primary text-label font-bold hover:underline">View All Log</button>
+              <button className="text-sunrise text-label font-bold hover:underline">View All Log</button>
             </div>
 
             <Card className="p-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-sunrise/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
               
               <div className="relative space-y-6 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant/30 w-full">
                 {activityLog.map((log) => (
                   <div key={log.id} className="relative flex gap-xl items-start pl-8 w-full">
                     <span className={cn(
-                      "absolute left-0 top-1 w-6 h-6 rounded-none border-4 border-white z-10",
+                      "absolute left-0 top-1 w-6 h-6 rounded-[6px] border-4 border-white z-10",
                       log.type === 'success' && "bg-success",
                       log.type === 'warning' && "bg-[#F59E0B]",
-                      log.type === 'primary' && "bg-primary"
+                      log.type === 'primary' && "bg-sunrise"
                     )}></span>
-                    <div className="flex-1 pb-4 border-b border-outline-variant/20 last:border-b-0 last:pb-0">
+                    <div className="flex-1 pb-4 border-b border-[#E0E0E0]/20 last:border-b-0 last:pb-0">
                       <p className="text-body font-medium">
                         <span className="font-bold text-on-surface">{log.userName}</span>{' '}
                         <span className="text-on-surface-variant">{log.actionText}</span>{' '}
-                        <span className="text-primary italic font-bold">{log.targetText}</span>
+                        <span className="text-sunrise italic font-bold">{log.targetText}</span>
                       </p>
                       <p className="text-label text-on-surface-variant mt-1">{log.timeText}</p>
                     </div>
@@ -477,9 +464,9 @@ export default function OperationsDashboard() {
       {/* FILTER: MY TASKS */}
       {filter === 'tasks' && (
         <Card className="flex flex-col">
-          <div className="bg-slate-50 px-lg py-md border-b border-outline-variant flex justify-between items-center">
+          <div className="bg-slate-50 px-lg py-md border-b border-[#E0E0E0] flex justify-between items-center">
             <h3 className="text-h3 font-bold text-on-surface flex items-center gap-2">
-              <CheckSquare2 className="w-5 h-5 text-primary" />
+              <CheckSquare2 className="w-5 h-5 text-sunrise" />
               My Tasks
             </h3>
             <span className="text-xs font-bold text-on-surface-variant">
@@ -496,7 +483,7 @@ export default function OperationsDashboard() {
                       type="checkbox"
                       checked={task.status === 'completed'}
                       onChange={() => handleToggleTask(task.id)}
-                      className="w-4 h-4 border border-outline focus:ring-0 text-primary cursor-pointer rounded-none"
+                      className="w-4 h-4 border border-outline focus:ring-0 text-sunrise cursor-pointer rounded-[6px]"
                     />
                     <div>
                       <p className={cn(
@@ -538,9 +525,9 @@ export default function OperationsDashboard() {
       {/* FILTER: MY DEADLINES */}
       {filter === 'deadlines' && (
         <Card className="flex flex-col">
-          <div className="bg-slate-50 px-lg py-md border-b border-outline-variant flex justify-between items-center">
+          <div className="bg-slate-50 px-lg py-md border-b border-[#E0E0E0] flex justify-between items-center">
             <h3 className="text-h3 font-bold text-on-surface flex items-center gap-2">
-              <Clock className="w-5 h-5 text-primary" />
+              <Icon name="schedule" className="w-5 h-5 text-sunrise" />
               Critical Deadlines & Alerts
             </h3>
             <Badge variant="critical">Urgent Action Required</Badge>
@@ -553,7 +540,7 @@ export default function OperationsDashboard() {
                   key={task.id} 
                   className={cn(
                     "p-4 border-l-4 bg-slate-50 flex flex-col md:flex-row justify-between md:items-center gap-md",
-                    task.status === 'overdue' ? "border-l-error bg-error/5" : "border-l-orange-500 bg-orange-500/5"
+                    task.status === 'overdue' ? "border-l-error bg-ember/5" : "border-l-orange-500 bg-orange-500/5"
                   )}
                 >
                   <div className="space-y-1">
@@ -568,7 +555,7 @@ export default function OperationsDashboard() {
                   </div>
                   
                   <div className="flex items-center gap-2 shrink-0">
-                    <AlertCircle className={cn(
+                    <Icon name="warning" className={cn(
                       "w-4 h-4",
                       task.status === 'overdue' ? "text-error" : "text-orange-500"
                     )} />
@@ -587,11 +574,11 @@ export default function OperationsDashboard() {
       )}
 
       {/* FOOTER BLOCK */}
-      <footer className="pt-xl pb-lg border-t border-outline-variant bg-slate-50 flex justify-between items-center text-on-surface-variant text-label mt-xl">
+      <footer className="pt-xl pb-lg border-t border-[#E0E0E0] bg-slate-50 flex justify-between items-center text-on-surface-variant text-label mt-xl">
         <p>© 2024 Bynd BD Travel Ops. All rights reserved.</p>
         <div className="flex gap-xl">
-          <a className="hover:text-primary transition-colors font-bold" href="#">Privacy Policy</a>
-          <a className="hover:text-primary transition-colors font-bold" href="#">System Status: 100%</a>
+          <a className="hover:text-sunrise transition-colors font-bold" href="#">Privacy Policy</a>
+          <a className="hover:text-sunrise transition-colors font-bold" href="#">System Status: 100%</a>
         </div>
       </footer>
     </div>

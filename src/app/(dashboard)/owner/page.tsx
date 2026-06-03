@@ -4,22 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import ClassBTimer from '@/components/dashboards/class-b-timer';
 import ClassCModal from '@/components/dashboards/class-c-modal';
-import { 
-  Calendar, 
-  CalendarDays, 
-  ChevronDown, 
-  Banknote, 
-  Wallet, 
-  CalendarCheck, 
-  Gauge, 
-  Compass, 
-  AlertTriangle, 
-  AlertCircle, 
-  ChevronRight, 
-  Rocket, 
-  Megaphone, 
-  Mountain 
-} from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 
 // ============================================================================
 // MOCK DATA STRUCTURES (Prepared for seamless replacement with Supabase hooks)
@@ -75,16 +60,16 @@ export default function OwnerDashboard() {
         <div>
           <h2 className="text-h1 font-h1 text-on-surface mb-xs">Dashboard — Owner</h2>
           <div className="flex items-center gap-xs text-on-surface-variant">
-            <Calendar className="w-[18px] h-[18px]" />
+            <Icon name="calendar_today" className="w-[18px] h-[18px]" />
             <p className="text-body">
-              Today | This Week | <span className="text-primary font-bold">This Month</span> | Custom
+              Today | This Week | <span className="text-sunrise font-bold">This Month</span> | Custom
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-3 bg-surface-container-low px-lg py-md rounded-xl border border-outline-variant shadow-sm cursor-pointer">
-          <CalendarDays className="w-5 h-5 text-primary" />
+        <div className="flex items-center gap-3 bg-surface-container-low px-lg py-md rounded-xl border border-[#E0E0E0] shadow-sm cursor-pointer">
+          <Icon name="date_range" size={20} color="#FF5F0F" />
           <span className="text-label">Oct 01, 2023 - Oct 31, 2023</span>
-          <ChevronDown className="w-4 h-4 text-outline" />
+          <Icon name="expand_more" size={16} color="#9E9E9E" />
         </div>
       </section>
 
@@ -94,7 +79,7 @@ export default function OwnerDashboard() {
         <Card className="p-lg flex flex-col justify-between h-40">
           <div className="flex justify-between items-start">
             <p className="text-label text-on-surface-variant">Revenue (MTD)</p>
-            <Banknote className="w-5 h-5 text-primary" />
+            <Icon name="payments" size={20} color="#FF5F0F" />
           </div>
           <div>
             <h3 className="text-h1">{formatBDT(BUSINESS_METRICS.revenue.value)}</h3>
@@ -108,7 +93,7 @@ export default function OwnerDashboard() {
         <Card className="p-lg flex flex-col justify-between h-40">
           <div className="flex justify-between items-start">
             <p className="text-label text-on-surface-variant">Profit (MTD)</p>
-            <Wallet className="w-5 h-5 text-secondary" />
+            <Icon name="account_balance_wallet" size={20} color="#E8A830" />
           </div>
           <div>
             <h3 className="text-h1">{formatBDT(BUSINESS_METRICS.profit.value)}</h3>
@@ -122,7 +107,7 @@ export default function OwnerDashboard() {
         <Card className="p-lg h-40 relative overflow-hidden group">
           <div className="flex justify-between items-start relative z-10">
             <p className="text-label text-on-surface-variant">Bookings (MTD)</p>
-            <CalendarCheck className="w-5 h-5 text-primary" />
+            <Icon name="check_circle" className="w-5 h-5 text-sunrise" />
           </div>
           <div className="mt-2 relative z-10">
             <h3 className="text-h2">{BUSINESS_METRICS.bookings.total} Total</h3>
@@ -139,19 +124,19 @@ export default function OwnerDashboard() {
             </div>
           </div>
           <div className="absolute bottom-lg right-lg text-right">
-            <p className="text-[20px] font-bold text-primary leading-none">{BUSINESS_METRICS.bookings.conversionRate}%</p>
+            <p className="text-[20px] font-bold text-sunrise leading-none">{BUSINESS_METRICS.bookings.conversionRate}%</p>
             <p className="text-[9px] text-on-surface-variant uppercase tracking-wider">Conv. Rate</p>
           </div>
         </Card>
 
         {/* Efficiency Card */}
-        <Card className="p-lg flex flex-col justify-between h-40 bg-primary/5 border-primary/20">
+        <Card className="p-lg flex flex-col justify-between h-40 bg-sunrise/5 border-sunrise/20">
           <div className="flex justify-between items-start">
             <p className="text-label text-on-surface-variant">Ops Efficiency</p>
-            <Gauge className="w-5 h-5 text-primary" />
+            <Icon name="speed" size={20} color="#FF5F0F" />
           </div>
           <div>
-            <h3 className="text-h1 text-primary">{BUSINESS_METRICS.opsEfficiency.percentage}%</h3>
+            <h3 className="text-h1 text-sunrise">{BUSINESS_METRICS.opsEfficiency.percentage}%</h3>
             <div className="w-full bg-outline-variant/30 h-2 rounded-full mt-2">
               <div 
                 className="bg-success h-full rounded-full transition-all duration-500" 
@@ -168,19 +153,19 @@ export default function OwnerDashboard() {
         <div className="space-y-lg">
           {/* Live Trips Card */}
           <Card className="overflow-hidden flex flex-col">
-            <div className="bg-surface-container px-lg py-md border-b border-outline-variant flex justify-between items-center">
+            <div className="bg-surface-container px-lg py-md border-b border-[#E0E0E0] flex justify-between items-center">
               <h4 className="text-h2 flex items-center gap-2">
-                <Compass className="w-5 h-5 text-primary" />
+                <Icon name="explore" className="w-5 h-5 text-sunrise" />
                 Live Trips
               </h4>
               <Badge variant="primary">{LIVE_TRIPS.length} Active</Badge>
             </div>
             <div className="p-lg">
               {LIVE_TRIPS.map((trip) => (
-                <div key={trip.id} className="flex items-center justify-between p-lg border border-outline-variant bg-surface">
+                <div key={trip.id} className="flex items-center justify-between p-lg border border-[#E0E0E0] bg-surface">
                   <div className="flex gap-4 items-center">
                     <div className="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center">
-                      <Mountain className="w-6 h-6 text-primary" />
+                      <Icon name="landscape" size={24} color="#FF5F0F" />
                     </div>
                     <div>
                       <h5 className="text-h4">{trip.name}</h5>
@@ -191,7 +176,7 @@ export default function OwnerDashboard() {
                   </div>
                   <div className="flex flex-col items-end">
                     <Badge variant="success" className="mb-1">{trip.status}</Badge>
-                    <button className="text-primary text-label hover:underline">Details</button>
+                    <button className="text-sunrise text-label hover:underline">Details</button>
                   </div>
                 </div>
               ))}
@@ -200,9 +185,9 @@ export default function OwnerDashboard() {
 
           {/* Team Alerts Card */}
           <Card className="overflow-hidden flex flex-col">
-            <div className="bg-surface-container px-lg py-md border-b border-outline-variant">
+            <div className="bg-surface-container px-lg py-md border-b border-[#E0E0E0]">
               <h4 className="text-h2 flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-error" />
+                <Icon name="warning" className="w-5 h-5 text-error" />
                 Team Alerts
               </h4>
             </div>
@@ -210,16 +195,16 @@ export default function OwnerDashboard() {
               {TEAM_ALERTS.map((alert) => (
                 <div 
                   key={alert.id} 
-                  className="flex items-center justify-between p-lg border-l-4 border-error bg-error/5"
+                  className="flex items-center justify-between p-lg border-l-4 border-error bg-ember/5"
                 >
                   <div className="flex items-center gap-3">
-                    <AlertCircle className="w-5 h-5 text-error" />
+                    <Icon name="warning" className="w-5 h-5 text-error" />
                     <div>
                       <p className="text-label font-bold">{alert.title}</p>
                       <p className="text-[12px] text-on-surface-variant">{alert.description}</p>
                     </div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-outline cursor-pointer" />
+                  <Icon name="chevron_right" className="w-5 h-5 text-outline cursor-pointer" />
                 </div>
               ))}
             </div>
@@ -230,9 +215,9 @@ export default function OwnerDashboard() {
         <div className="space-y-lg">
           {/* Active Projects Card */}
           <Card className="overflow-hidden flex flex-col">
-            <div className="bg-surface-container px-lg py-md border-b border-outline-variant">
+            <div className="bg-surface-container px-lg py-md border-b border-[#E0E0E0]">
               <h4 className="text-h2 flex items-center gap-2">
-                <Rocket className="w-5 h-5 text-primary" />
+                <Icon name="rocket_launch" size={20} color="#FF5F0F" />
                 Active Projects
               </h4>
             </div>
@@ -256,9 +241,9 @@ export default function OwnerDashboard() {
 
           {/* Escalations Card */}
           <Card className="overflow-hidden flex flex-col">
-            <div className="bg-surface-container px-lg py-md border-b border-outline-variant">
+            <div className="bg-surface-container px-lg py-md border-b border-[#E0E0E0]">
               <h4 className="text-h2 flex items-center gap-2">
-                <Megaphone className="w-5 h-5 text-primary" />
+                <Icon name="campaign" size={20} color="#FF5F0F" />
                 Escalations
               </h4>
             </div>
@@ -284,7 +269,7 @@ export default function OwnerDashboard() {
       {/* Section: Bottom Summary (Operational Outlook & System Health) */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-lg items-center">
         <div className="md:col-span-2">
-          <div className="bg-inverse-surface rounded-none p-xl flex items-center gap-xl">
+          <div className="bg-inverse-surface rounded-[6px] p-xl flex items-center gap-xl">
             <div className="hidden md:block flex-shrink-0">
               <Image 
                 alt="Data Visualization Overlay" 
@@ -299,14 +284,14 @@ export default function OwnerDashboard() {
               <p className="text-[#9CA3AF] text-body max-w-lg">
                 All primary business units are operating within defined KPIs. Cash flow is healthy with no projected shortfalls.
               </p>
-              <button className="mt-md bg-primary text-on-primary px-lg py-2 rounded-lg font-bold text-label hover:opacity-90 transition-opacity">
+              <button className="mt-md bg-sunrise text-white px-lg py-2 rounded-lg font-bold text-label hover:opacity-90 transition-opacity">
                 Export Monthly Report
               </button>
             </div>
           </div>
         </div>
 
-        <Card className="p-xl rounded-none h-full flex flex-col justify-center text-center">
+        <Card className="p-xl rounded-[6px] h-full flex flex-col justify-center text-center">
           <p className="text-on-surface-variant text-label uppercase tracking-widest mb-2">System Health</p>
           <div className="inline-flex items-center justify-center gap-2 mb-2">
             <span className="w-3 h-3 bg-success rounded-full animate-pulse" />

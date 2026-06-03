@@ -1,6 +1,6 @@
 import React from 'react';
 import { TeamMember } from '@/actions/iam';
-import { Shield, User, Clock, Building2 } from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 
 interface TeamListProps {
   members: TeamMember[];
@@ -74,16 +74,16 @@ function TeamMemberRow({ member }: { member: TeamMember }) {
   const initials = getInitials(member.full_name);
 
   return (
-    <tr className="border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+    <tr className="border-b border-[#E0E0E0] hover:bg-surface-container-low transition-colors group">
       {/* Identity Cell */}
       <td className="px-lg py-md">
         <div className="flex items-center gap-md">
           {/* Avatar */}
           <div
-            className={`w-10 h-10 rounded-none ${avatarColor} flex items-center justify-center text-white font-bold text-sm shrink-0 border border-white/20`}
+            className={`w-10 h-10 rounded-[6px] ${avatarColor} flex items-center justify-center text-white font-bold text-sm shrink-0 border border-white/20`}
             aria-hidden="true"
           >
-            {initials || <User className="w-5 h-5" />}
+            {initials || <Icon name="person" className="w-5 h-5" />}
           </div>
           {/* Name & Email */}
           <div className="min-w-0">
@@ -96,9 +96,9 @@ function TeamMemberRow({ member }: { member: TeamMember }) {
       {/* Layer Cell */}
       <td className="px-lg py-md">
         <div className="flex items-center gap-xs">
-          <Shield className="w-3.5 h-3.5 text-outline shrink-0" />
+          <Icon name="security" className="w-3.5 h-3.5 text-outline shrink-0" />
           <span
-            className={`inline-flex items-center px-sm py-0.5 text-label font-bold rounded-none ${layerConfig.bg} ${layerConfig.color} uppercase tracking-wide`}
+            className={`inline-flex items-center px-sm py-0.5 text-label font-bold rounded-[6px] ${layerConfig.bg} ${layerConfig.color} uppercase tracking-wide`}
           >
             {member.layer} — {layerConfig.label}
           </span>
@@ -110,7 +110,7 @@ function TeamMemberRow({ member }: { member: TeamMember }) {
         <div className="flex items-center gap-xs text-body text-on-surface-variant">
           {member.department ? (
             <>
-              <Building2 className="w-3.5 h-3.5 shrink-0 text-outline" />
+              <Icon name="business" className="w-3.5 h-3.5 shrink-0 text-outline" />
               <span>{member.department}</span>
             </>
           ) : (
@@ -130,7 +130,7 @@ function TeamMemberRow({ member }: { member: TeamMember }) {
       {/* Joined Date Cell */}
       <td className="px-lg py-md">
         <div className="flex items-center gap-xs text-label text-on-surface-variant">
-          <Clock className="w-3.5 h-3.5 shrink-0" />
+          <Icon name="schedule" className="w-3.5 h-3.5 shrink-0" />
           <span>{formatJoinDate(member.created_at)}</span>
         </div>
       </td>
@@ -150,11 +150,11 @@ export function TeamList({ members }: TeamListProps) {
   }
 
   return (
-    <div className="border border-outline-variant rounded-none overflow-hidden">
+    <div className="border border-[#E0E0E0] rounded-[6px] overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-left min-w-[700px]" aria-label="Team Directory">
           {/* Column Headers */}
-          <thead className="bg-surface-container-low border-b-2 border-outline-variant">
+          <thead className="bg-surface-container-low border-b-2 border-[#E0E0E0]">
             <tr>
               <th className="px-lg py-sm text-label font-bold text-on-surface-variant uppercase tracking-wider">
                 Member
@@ -182,7 +182,7 @@ export function TeamList({ members }: TeamListProps) {
           </tbody>
 
           {/* Footer summary */}
-          <tfoot className="bg-surface-container-low border-t border-outline-variant">
+          <tfoot className="bg-surface-container-low border-t border-[#E0E0E0]">
             <tr>
               <td colSpan={5} className="px-lg py-sm text-label text-on-surface-variant">
                 Showing <span className="font-bold text-on-surface">{members.length}</span> team member{members.length !== 1 ? 's' : ''}

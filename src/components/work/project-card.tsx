@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
-import * as Icons from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
 export interface ProjectCardProps {
@@ -10,7 +10,7 @@ export interface ProjectCardProps {
   description: string;
   progress: number;
   status: 'Healthy' | 'At Risk' | 'Planning';
-  iconName: string; // Lucide icon component name (e.g. Megaphone, Globe, Truck)
+  iconName: string; // Lucide icon name (e.g. Megaphone, Globe, Truck)
   assignees: Array<{
     name: string;
     avatar: string;
@@ -18,10 +18,16 @@ export interface ProjectCardProps {
   className?: string;
 }
 
-/**
- * ProjectCard represents an individual project panel displaying progress,
- * status health badges, and active project team members.
- */
+const mapLucideToMaterial = (lucideName: string): string => {
+  const map: Record<string, string> = {
+    Megaphone: 'campaign',
+    Globe: 'public',
+    Truck: 'local_shipping',
+    Folder: 'folder',
+  };
+  return map[lucideName] || 'folder';
+};
+
 export function ProjectCard({
   title,
   description,
@@ -31,9 +37,6 @@ export function ProjectCard({
   assignees,
   className
 }: ProjectCardProps) {
-  // Extract icon dynamically or fallback to Folder
-  const LucideIcon = (Icons[iconName as keyof typeof Icons] as React.ComponentType<{ className?: string }>) || Icons.Folder;
-
   // Map health statuses to badge variants
   const healthVariants = {
     Healthy: 'success',
@@ -42,44 +45,50 @@ export function ProjectCard({
   } as const;
 
   const bgIconColor = {
-    Healthy: 'bg-primary/10 text-primary',
-    'At Risk': 'bg-secondary-container/10 text-secondary',
-    Planning: 'bg-tertiary/10 text-tertiary'
+    Healthy: 'bg-sunrise/10 text-sunrise',
+    'At Risk': 'bg-golden-hour/10 text-golden-hour',
+    Planning: 'bg-dusk/10 text-dusk'
+  } as const;
+
+  const iconColorHex = {
+    Healthy: '#FF5F0F',
+    'At Risk': '#E8A830',
+    Planning: '#1D1D1B'
   } as const;
 
   return (
-    <Card className={cn("p-xl rounded-none bg-white flex flex-col justify-between group", className)}>
+    <Card className={cn("p-xl bg-white flex flex-col justify-between group", className)}>
       <div>
         {/* Top Header: Icon & Health Status */}
         <div className="flex justify-between items-start mb-md">
-          <div className={cn("p-sm rounded-lg", bgIconColor[status] || 'bg-primary/10 text-primary')}>
-            <LucideIcon className="w-5 h-5" />
+          <div className={cn("p-sm rounded-lg flex items-center justify-center", bgIconColor[status] || 'bg-sunrise/10')}>
+            <Icon name={mapLucideToMaterial(iconName)} size={20} color={iconColorHex[status] || '#FF5F0F'} />
           </div>
           <Badge variant={healthVariants[status]}>{status}</Badge>
         </div>
 
         {/* Project Title */}
-        <h3 className="text-h3 font-h3 text-on-background mb-xs group-hover:text-primary transition-colors cursor-pointer">
+        <h3 className="text-lg font-poppins font-semibold text-dusk mb-xs group-hover:text-sunrise transition-colors cursor-pointer">
           {title}
         </h3>
         
         {/* Description */}
-        <p className="text-body text-on-surface-variant mb-lg line-clamp-2">
+        <p className="text-sm font-ubuntu text-[#555555] mb-lg line-clamp-2">
           {description}
         </p>
       </div>
 
       {/* Progress Section */}
       <div className="space-y-sm">
-        <div className="flex justify-between text-label">
-          <span className="text-on-surface-variant">Progress</span>
-          <span className="font-bold">{progress}%</span>
+        <div className="flex justify-between text-xs font-ubuntu text-[#555555]">
+          <span>Progress</span>
+          <span className="font-semibold text-dusk">{progress}%</span>
         </div>
-        <div className="w-full bg-surface-container rounded-none h-2 overflow-hidden border border-outline-variant/10">
+        <div className="w-full bg-[#F5F5F5] rounded-full h-2 overflow-hidden border border-[#E0E0E0]/30">
           <div 
             className={cn(
-              "h-full rounded-none transition-all duration-500",
-              status === 'Healthy' ? 'bg-primary' : status === 'At Risk' ? 'bg-secondary' : 'bg-tertiary'
+              "h-full rounded-full transition-all duration-500",
+              status === 'Healthy' ? 'bg-sunrise' : status === 'At Risk' ? 'bg-[#E8A830]' : 'bg-dusk'
             )}
             style={{ width: `${progress}%` }}
           />
@@ -94,11 +103,11 @@ export function ProjectCard({
               alt={assignee.name}
               width={24}
               height={24}
-              className="rounded-full border-2 border-white object-cover"
+              className="rounded-full border-2 border-white object-cover shadow-sm"
             />
           ))}
           {assignees.length > 3 && (
-            <div className="w-6 h-6 rounded-full border-2 border-white bg-surface-variant flex items-center justify-center text-[10px] font-bold text-on-surface-variant">
+            <div className="w-6 h-6 rounded-full border-2 border-white bg-[#F5F5F5] flex items-center justify-center text-[10px] font-poppins font-semibold text-[#555555]">
               +{assignees.length - 3}
             </div>
           )}

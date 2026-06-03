@@ -3,23 +3,7 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import {
-  Phone,
-  MessageSquare,
-  AlertTriangle,
-  Heart,
-  CheckCircle2,
-  Clock,
-  MapPin,
-  Calendar,
-  X,
-  Play,
-  ChevronRight,
-  LifeBuoy,
-  UserCheck,
-  AlertOctagon,
-  Check
-} from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
 // ============================================================================
@@ -253,25 +237,25 @@ export default function HostDashboard() {
     <div className="max-w-md mx-auto bg-[#f9f9ff] text-on-surface pb-[140px] relative min-h-screen">
       
       {/* Top Banner / Breadcrumb Header */}
-      <div className="flex flex-col gap-1 pb-4 mb-4 border-b border-outline-variant">
+      <div className="flex flex-col gap-1 pb-4 mb-4 border-b border-[#E0E0E0]">
         <nav className="flex items-center gap-2 text-on-surface-variant text-[11px] uppercase tracking-wider font-bold">
           <span>Coordinator Console</span>
-          <ChevronRight className="w-3.5 h-3.5 text-on-surface-variant" />
-          <span className="text-primary">Host View</span>
+          <Icon name="chevron_right" className="w-3.5 h-3.5 text-on-surface-variant" />
+          <span className="text-sunrise">Host View</span>
         </nav>
         <h1 className="text-h2 font-h2 text-on-surface">Dashboard — Host</h1>
       </div>
 
       {/* Segmented Quick Filters */}
-      <div className="flex bg-surface-container-low border border-outline-variant p-1 rounded-none mb-6">
+      <div className="flex bg-surface-container-low border border-[#E0E0E0] p-1 rounded-[6px] mb-6">
         {(['all', 'trips', 'active', 'checklists'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={cn(
-              "flex-1 px-2 py-2 text-caption font-bold uppercase transition-all rounded-none min-h-[40px] flex items-center justify-center text-center",
+              "flex-1 px-2 py-2 text-caption font-bold uppercase transition-all rounded-[6px] min-h-[40px] flex items-center justify-center text-center",
               activeTab === tab
-                ? "bg-primary text-on-primary font-bold"
+                ? "bg-sunrise text-white font-bold"
                 : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/40"
             )}
           >
@@ -286,7 +270,7 @@ export default function HostDashboard() {
         activeTab === 'trips' && "hidden",
         activeTab === 'checklists' && "opacity-80"
       )}>
-        <Card className="rounded-none border border-outline-variant bg-white overflow-hidden shadow-sm">
+        <Card className="rounded-[6px] border border-[#E0E0E0] bg-white overflow-hidden shadow-sm">
           {/* Active Trip Header Image */}
           <div className="relative h-40 overflow-hidden">
             <img 
@@ -295,10 +279,10 @@ export default function HostDashboard() {
               alt={activeTrip.title}
             />
             <div className="absolute top-sm left-sm flex gap-xs">
-              <span className="bg-error text-on-error px-2.5 py-1 rounded-none text-caption font-semibold active-pulse flex items-center gap-1">
-                <span className="w-1.5 h-1.5 bg-white rounded-none"></span> 🔴 ACTIVE NOW
+              <span className="bg-ember text-on-error px-2.5 py-1 rounded-[6px] text-caption font-semibold active-pulse flex items-center gap-1">
+                <span className="w-1.5 h-1.5 bg-white rounded-[6px]"></span> 🔴 ACTIVE NOW
               </span>
-              <span className="bg-white/95 text-primary px-2.5 py-1 rounded-none text-caption font-semibold border border-primary/20">
+              <span className="bg-white/95 text-sunrise px-2.5 py-1 rounded-[6px] text-caption font-semibold border border-sunrise/20">
                 {activeTrip.dayProgress}
               </span>
             </div>
@@ -312,7 +296,7 @@ export default function HostDashboard() {
               </div>
               <Badge 
                 variant={activeTrip.statusType === 'success' ? 'success' : 'critical'}
-                className="rounded-none font-bold py-1 px-3 border"
+                className="rounded-[6px] font-bold py-1 px-3 border"
               >
                 {activeTrip.statusText === 'All Good' ? '🟢 ALL GOOD' : `⚠️ ${activeTrip.statusText}`}
               </Badge>
@@ -322,11 +306,11 @@ export default function HostDashboard() {
             <div>
               <div className="flex justify-between text-label mb-1">
                 <span className="text-on-surface-variant font-medium">Itinerary Progress</span>
-                <span className="text-primary font-extrabold">{activeTrip.overallProgress}%</span>
+                <span className="text-sunrise font-extrabold">{activeTrip.overallProgress}%</span>
               </div>
-              <div className="w-full bg-slate-100 h-3 rounded-none overflow-hidden border border-outline-variant/30">
+              <div className="w-full bg-slate-100 h-3 rounded-[6px] overflow-hidden border border-[#E0E0E0]/30">
                 <div 
-                  className="bg-primary h-full transition-all duration-300" 
+                  className="bg-sunrise h-full transition-all duration-300" 
                   style={{ width: `${activeTrip.overallProgress}%` }}
                 ></div>
               </div>
@@ -336,9 +320,9 @@ export default function HostDashboard() {
             <div className="pt-2">
               <button 
                 onClick={() => setIsCheckInOpen(true)}
-                className="w-full min-h-[48px] bg-success text-white rounded-none font-h4 flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all font-bold uppercase tracking-wider shadow-sm border border-success/30"
+                className="w-full min-h-[48px] bg-success text-white rounded-[6px] font-h4 flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all font-bold uppercase tracking-wider shadow-sm border border-success/30"
               >
-                <UserCheck className="w-5 h-5 text-white" />
+                <Icon name="how_to_reg" size={20} color="#FFFFFF" />
                 Daily Check-In
               </button>
             </div>
@@ -353,7 +337,7 @@ export default function HostDashboard() {
       )}>
         <div className="flex justify-between items-center mb-3">
           <h3 className="font-h3 text-h3 text-on-surface">Today&apos;s Itinerary</h3>
-          <button className="text-primary font-label hover:underline text-xs uppercase tracking-wider font-bold">
+          <button className="text-sunrise font-label hover:underline text-xs uppercase tracking-wider font-bold">
             [View Map]
           </button>
         </div>
@@ -367,22 +351,22 @@ export default function HostDashboard() {
                 key={item.id}
                 onClick={() => handleItineraryItemClick(item.id)}
                 className={cn(
-                  "p-4 border transition-all duration-150 cursor-pointer rounded-none flex items-center gap-4",
+                  "p-4 border transition-all duration-150 cursor-pointer rounded-[6px] flex items-center gap-4",
                   isCompleted 
-                    ? "bg-slate-50 border-outline-variant/30 text-on-surface-variant opacity-75"
+                    ? "bg-slate-50 border-[#E0E0E0]/30 text-on-surface-variant opacity-75"
                     : isActive
-                      ? "bg-white border-2 border-primary-container shadow-sm text-on-surface"
-                      : "bg-white border-outline-variant text-on-surface opacity-90"
+                      ? "bg-white border-2 border-sunrise-container shadow-sm text-on-surface"
+                      : "bg-white border-[#E0E0E0] text-on-surface opacity-90"
                 )}
                 title="Click to toggle status"
               >
                 <div className="flex flex-col items-center shrink-0">
                   {isCompleted ? (
-                    <CheckCircle2 className="w-6 h-6 text-success" />
+                    <Icon name="check_circle" className="w-6 h-6 text-success" />
                   ) : isActive ? (
-                    <Play className="w-6 h-6 text-primary fill-primary animate-pulse" />
+                    <Icon name="play_arrow" size={24} color="#FF5F0F" className="animate-pulse" />
                   ) : (
-                    <Clock className="w-6 h-6 text-on-surface-variant/50" />
+                    <Icon name="schedule" className="w-6 h-6 text-on-surface-variant/50" />
                   )}
                 </div>
 
@@ -391,12 +375,12 @@ export default function HostDashboard() {
                     <p className={cn(
                       "font-h4 text-[14px]",
                       isCompleted && "line-through text-on-surface-variant/60 font-medium",
-                      isActive && "text-primary font-bold"
+                      isActive && "text-sunrise font-bold"
                     )}>
                       {item.time} {item.title}
                     </p>
                     {isActive && (
-                      <Badge variant="primary" className="rounded-none py-0 px-2 text-[9px] uppercase font-bold tracking-wide">
+                      <Badge variant="primary" className="rounded-[6px] py-0 px-2 text-[9px] uppercase font-bold tracking-wide">
                         NOW
                       </Badge>
                     )}
@@ -407,7 +391,7 @@ export default function HostDashboard() {
                     )}
                   </div>
                   <p className="text-label text-on-surface-variant mt-0.5 flex items-center gap-1 font-medium">
-                    <MapPin className="w-3.5 h-3.5 text-on-surface-variant/60" />
+                    <Icon name="location_on" className="w-3.5 h-3.5 text-on-surface-variant/60" />
                     {item.location}
                   </p>
                 </div>
@@ -422,16 +406,16 @@ export default function HostDashboard() {
         "mb-6 transition-all duration-300",
         activeTab === 'trips' && "hidden"
       )}>
-        <Card className="bg-inverse-surface text-white p-4 rounded-none shadow-md border-b-2 border-black flex justify-between items-center">
+        <Card className="bg-inverse-surface text-white p-4 rounded-[6px] shadow-md border-b-2 border-black flex justify-between items-center">
           <div>
             <h4 className="font-h4 text-sm font-bold uppercase tracking-wider text-slate-300">Group Capacity</h4>
-            <p className="text-xs text-primary-fixed-dim mt-0.5 font-bold">
+            <p className="text-xs text-sunrise-fixed-dim mt-0.5 font-bold">
               {checkedInCount} of {totalTravelersCount} Accounted
             </p>
           </div>
           <button 
             onClick={() => setIsCheckInOpen(true)}
-            className="bg-primary text-white border border-primary/40 px-4 min-h-[48px] rounded-none text-label font-bold uppercase tracking-wider hover:bg-primary/95"
+            className="bg-sunrise text-white border border-sunrise/40 px-4 min-h-[48px] rounded-[6px] text-label font-bold uppercase tracking-wider hover:bg-sunrise/95"
           >
             Manifest
           </button>
@@ -446,10 +430,10 @@ export default function HostDashboard() {
         <div className="flex justify-between items-center mb-3">
           <h3 className="font-h3 text-h3 text-on-surface font-bold">Traveler Status</h3>
           <div className="flex gap-2">
-            <button className="text-primary hover:underline text-caption font-bold uppercase tracking-wider px-2 py-1 border border-outline-variant/30 hover:bg-slate-50">
+            <button className="text-sunrise hover:underline text-caption font-bold uppercase tracking-wider px-2 py-1 border border-[#E0E0E0]/30 hover:bg-slate-50">
               [Full List]
             </button>
-            <button className="text-error hover:underline text-caption font-bold uppercase tracking-wider px-2 py-1 border border-error/20 hover:bg-error/5">
+            <button className="text-error hover:underline text-caption font-bold uppercase tracking-wider px-2 py-1 border border-error/20 hover:bg-ember/5">
               [Medical Summary]
             </button>
           </div>
@@ -459,10 +443,10 @@ export default function HostDashboard() {
           {travelers.map((traveler) => (
             <div 
               key={traveler.id} 
-              className="flex items-center gap-4 p-3 bg-white rounded-none border border-outline-variant h-20 shadow-xs"
+              className="flex items-center gap-4 p-3 bg-white rounded-[6px] border border-[#E0E0E0] h-20 shadow-xs"
             >
               {/* Initials avatar wrapper */}
-              <div className="w-11 h-11 bg-primary/10 border border-primary/20 text-primary flex items-center justify-center font-bold text-sm rounded-none shrink-0">
+              <div className="w-11 h-11 bg-sunrise/10 border border-sunrise/20 text-sunrise flex items-center justify-center font-bold text-sm rounded-[6px] shrink-0">
                 {traveler.initials}
               </div>
 
@@ -471,10 +455,10 @@ export default function HostDashboard() {
                 <p className="font-h4 text-[14px] text-on-surface truncate font-bold">{traveler.name}</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className={cn(
-                    "w-2 h-2 rounded-none",
+                    "w-2 h-2 rounded-[6px]",
                     traveler.status === 'Checked In' && "bg-[#10B981]",
                     traveler.status === 'Pending' && "bg-yellow-500",
-                    traveler.status === 'Mild Issue' && "bg-error"
+                    traveler.status === 'Mild Issue' && "bg-ember"
                   )}></span>
                   <span className="text-label text-on-surface-variant font-medium">
                     {traveler.status}
@@ -484,13 +468,13 @@ export default function HostDashboard() {
                 {/* Notes and alerts indicators */}
                 <div className="flex flex-wrap gap-2 mt-1">
                   {traveler.vitalNotes && (
-                    <span className="text-[10px] bg-slate-100 text-on-surface border border-outline-variant px-1.5 py-0.2 rounded-none font-bold uppercase">
+                    <span className="text-[10px] bg-slate-100 text-on-surface border border-[#E0E0E0] px-1.5 py-0.2 rounded-[6px] font-bold uppercase">
                       {traveler.vitalNotes}
                     </span>
                   )}
                   {traveler.medicalAlert && (
-                    <span className="text-[10px] bg-error-container text-error border border-error/20 px-1.5 py-0.2 rounded-none font-bold uppercase flex items-center gap-1">
-                      <Heart className="w-2.5 h-2.5 text-error fill-error" />
+                    <span className="text-[10px] bg-ember-container text-error border border-error/20 px-1.5 py-0.2 rounded-[6px] font-bold uppercase flex items-center gap-1">
+                      <Icon name="favorite" size={10} color="#C24B0A" />
                       {traveler.medicalAlert}
                     </span>
                   )}
@@ -501,17 +485,17 @@ export default function HostDashboard() {
               <div className="flex gap-1 shrink-0">
                 <button 
                   onClick={() => setSimulatedAction({ type: 'call', target: traveler.name })}
-                  className="w-12 min-h-[48px] bg-slate-100 border border-outline-variant rounded-none text-primary hover:bg-slate-200 flex items-center justify-center"
+                  className="w-12 min-h-[48px] bg-slate-100 border border-[#E0E0E0] rounded-[6px] text-sunrise hover:bg-slate-200 flex items-center justify-center"
                   title={`Call ${traveler.name}`}
                 >
-                  <Phone className="w-4 h-4" />
+                  <Icon name="phone" size={16} color="#FF5F0F" />
                 </button>
                 <button 
                   onClick={() => setSimulatedAction({ type: 'msg', target: traveler.name })}
-                  className="w-12 min-h-[48px] bg-slate-100 border border-outline-variant rounded-none text-primary hover:bg-slate-200 flex items-center justify-center"
+                  className="w-12 min-h-[48px] bg-slate-100 border border-[#E0E0E0] rounded-[6px] text-sunrise hover:bg-slate-200 flex items-center justify-center"
                   title={`Message ${traveler.name}`}
                 >
-                  <MessageSquare className="w-4 h-4" />
+                  <Icon name="chat" size={16} color="#FF5F0F" />
                 </button>
               </div>
             </div>
@@ -527,25 +511,25 @@ export default function HostDashboard() {
         <h3 className="font-h3 text-h3 text-on-surface mb-3 font-bold">Upcoming Trips</h3>
         <div className="space-y-3">
           {upcomingTrips.map((trip) => (
-            <Card key={trip.id} className="p-4 border border-outline-variant bg-white rounded-none">
+            <Card key={trip.id} className="p-4 border border-[#E0E0E0] bg-white rounded-[6px]">
               <div className="flex justify-between items-start gap-4">
                 <div>
                   <h4 className="font-h4 text-[14px] text-on-surface font-bold">{trip.title}</h4>
                   <p className="text-label text-on-surface-variant font-medium mt-0.5">{trip.id}</p>
                   <p className="text-label text-on-surface-variant font-normal mt-1 flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-on-surface-variant" />
+                    <Icon name="calendar_today" className="w-3.5 h-3.5 text-on-surface-variant" />
                     {trip.dates}
                   </p>
                 </div>
                 <Badge 
                   variant={trip.status === 'Ready' ? 'success' : 'neutral'}
-                  className="rounded-none font-bold py-0.5 px-2 border"
+                  className="rounded-[6px] font-bold py-0.5 px-2 border"
                 >
                   {trip.status}
                 </Badge>
               </div>
-              <div className="mt-4 pt-3 border-t border-outline-variant/60 flex justify-end gap-3 text-label">
-                <button className="text-primary hover:underline font-bold">[View Details]</button>
+              <div className="mt-4 pt-3 border-t border-[#E0E0E0]/60 flex justify-end gap-3 text-label">
+                <button className="text-sunrise hover:underline font-bold">[View Details]</button>
                 <button className="text-on-surface-variant hover:underline font-bold">[Checklists]</button>
               </div>
             </Card>
@@ -558,17 +542,17 @@ export default function HostDashboard() {
         <div className="grid grid-cols-2 gap-3">
           <button 
             onClick={() => setIsIncidentOpen(true)}
-            className="min-h-[48px] bg-error-container text-error border border-error/20 rounded-none font-h4 flex items-center justify-center gap-2 hover:bg-error/10 active:scale-[0.98] transition-all font-bold uppercase tracking-wider"
+            className="min-h-[48px] bg-ember-container text-error border border-error/20 rounded-[6px] font-h4 flex items-center justify-center gap-2 hover:bg-ember/10 active:scale-[0.98] transition-all font-bold uppercase tracking-wider"
           >
-            <AlertTriangle className="w-4 h-4 text-error" />
+            <Icon name="warning" className="w-4 h-4 text-error" />
             Report Issue
           </button>
           
           <button 
             onClick={() => setSimulatedAction({ type: 'call', target: 'Operations Support Team' })}
-            className="min-h-[48px] bg-slate-100 text-on-surface-variant border border-outline-variant rounded-none font-h4 flex items-center justify-center gap-2 hover:bg-slate-200 active:scale-[0.98] transition-all font-bold uppercase tracking-wider"
+            className="min-h-[48px] bg-slate-100 text-on-surface-variant border border-[#E0E0E0] rounded-[6px] font-h4 flex items-center justify-center gap-2 hover:bg-slate-200 active:scale-[0.98] transition-all font-bold uppercase tracking-wider"
           >
-            <LifeBuoy className="w-4 h-4 text-on-surface-variant" />
+            <Icon name="contact_support" size={16} color="#555555" />
             Support
           </button>
         </div>
@@ -578,9 +562,9 @@ export default function HostDashboard() {
       <div className="fixed bottom-[80px] left-0 right-0 px-4 pb-3 z-30 pointer-events-none">
         <button 
           onClick={() => setIsEmergencyOpen(true)}
-          className="w-full bg-error text-on-error min-h-[48px] h-14 rounded-none font-h3 flex items-center justify-center gap-3 active:scale-95 transition-all shadow-xl shadow-error/30 pointer-events-auto border-2 border-black uppercase tracking-wider font-extrabold"
+          className="w-full bg-ember text-on-error min-h-[48px] h-14 rounded-[6px] font-h3 flex items-center justify-center gap-3 active:scale-95 transition-all shadow-xl shadow-error/30 pointer-events-auto border-2 border-black uppercase tracking-wider font-extrabold"
         >
-          <AlertOctagon className="w-5 h-5 text-white" />
+          <Icon name="report" size={20} color="#FFFFFF" />
           Emergency Call
         </button>
       </div>
@@ -592,17 +576,17 @@ export default function HostDashboard() {
       {/* Modal 1: Daily Check-In Checklist */}
       {isCheckInOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white border-2 border-black rounded-none shadow-2xl w-full max-w-sm overflow-hidden">
+          <div className="bg-white border-2 border-black rounded-[6px] shadow-2xl w-full max-w-sm overflow-hidden">
             <div className="bg-success text-white px-5 py-3.5 flex justify-between items-center border-b-2 border-black">
               <h3 className="font-h3 text-h3 flex items-center gap-2 font-bold uppercase tracking-wide">
-                <UserCheck className="w-5 h-5" />
+                <Icon name="how_to_reg" size={20} color="#FFFFFF" />
                 Daily Checklist
               </h3>
               <button 
                 onClick={() => setIsCheckInOpen(false)}
                 className="text-white hover:text-slate-100 p-1 hover:bg-white/10"
               >
-                <X className="w-5 h-5" />
+                <Icon name="close" className="w-5 h-5" />
               </button>
             </div>
             
@@ -613,32 +597,32 @@ export default function HostDashboard() {
                   <div 
                     key={t.id}
                     onClick={() => handleToggleCheckIn(t.id)}
-                    className="flex items-center justify-between p-3 border border-outline-variant bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors"
+                    className="flex items-center justify-between p-3 border border-[#E0E0E0] bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors"
                   >
                     <span className="font-bold text-sm text-on-surface">{t.name}</span>
                     <div className={cn(
-                      "w-6 h-6 border flex items-center justify-center rounded-none font-bold",
+                      "w-6 h-6 border flex items-center justify-center rounded-[6px] font-bold",
                       t.status === 'Checked In' 
                         ? "bg-success border-success text-white" 
-                        : "bg-white border-outline-variant text-transparent"
+                        : "bg-white border-[#E0E0E0] text-transparent"
                     )}>
-                      <Check className="w-4 h-4 text-white" />
+                      <Icon name="check" size={16} color="#FFFFFF" />
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             
-            <div className="p-4 border-t border-outline-variant bg-slate-50 flex gap-2">
+            <div className="p-4 border-t border-[#E0E0E0] bg-slate-50 flex gap-2">
               <button
                 onClick={handleMarkAllCheckedIn}
-                className="flex-1 bg-primary text-on-primary font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-none hover:brightness-105"
+                className="flex-1 bg-sunrise text-white font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-[6px] hover:brightness-105"
               >
                 Mark All Checked In
               </button>
               <button
                 onClick={() => setIsCheckInOpen(false)}
-                className="px-4 border border-outline-variant text-on-surface-variant font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-none hover:bg-slate-100"
+                className="px-4 border border-[#E0E0E0] text-on-surface-variant font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-[6px] hover:bg-slate-100"
               >
                 Close
               </button>
@@ -650,17 +634,17 @@ export default function HostDashboard() {
       {/* Modal 2: Incident Report Form */}
       {isIncidentOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white border-2 border-black rounded-none shadow-2xl w-full max-w-sm overflow-hidden">
-            <div className="bg-error text-on-error px-5 py-3.5 flex justify-between items-center border-b-2 border-black">
+          <div className="bg-white border-2 border-black rounded-[6px] shadow-2xl w-full max-w-sm overflow-hidden">
+            <div className="bg-ember text-on-error px-5 py-3.5 flex justify-between items-center border-b-2 border-black">
               <h3 className="font-h3 text-h3 flex items-center gap-2 font-bold uppercase tracking-wide">
-                <AlertTriangle className="w-5 h-5" />
+                <Icon name="warning" className="w-5 h-5" />
                 Report Incident
               </h3>
               <button 
                 onClick={() => setIsIncidentOpen(false)}
                 className="text-on-error hover:text-slate-100 p-1 hover:bg-white/10"
               >
-                <X className="w-5 h-5" />
+                <Icon name="close" className="w-5 h-5" />
               </button>
             </div>
             
@@ -675,7 +659,7 @@ export default function HostDashboard() {
                   value={incidentTitle}
                   onChange={(e) => setIncidentTitle(e.target.value)}
                   placeholder="e.g. Minor ankle sprain / Delayed driver"
-                  className="w-full px-3 py-2 border border-outline-variant text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-none bg-surface-container-low text-on-surface"
+                  className="w-full px-3 py-2 border border-[#E0E0E0] text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-[6px] bg-surface-container-low text-on-surface"
                 />
               </div>
 
@@ -686,7 +670,7 @@ export default function HostDashboard() {
                 <select
                   value={incidentSeverity}
                   onChange={(e) => setIncidentSeverity(e.target.value as 'warning' | 'critical' | 'neutral')}
-                  className="w-full px-3 py-2 border border-outline-variant text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-none bg-surface-container-low text-on-surface"
+                  className="w-full px-3 py-2 border border-[#E0E0E0] text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-[6px] bg-surface-container-low text-on-surface"
                 >
                   <option value="warning">🟠 Warning (Minor/Mild)</option>
                   <option value="critical">🔴 Critical (Action Required)</option>
@@ -703,7 +687,7 @@ export default function HostDashboard() {
                   value={incidentDescription}
                   onChange={(e) => setIncidentDescription(e.target.value)}
                   placeholder="Provide immediate context and current traveler condition..."
-                  className="w-full px-3 py-2 border border-outline-variant text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-none bg-surface-container-low text-on-surface"
+                  className="w-full px-3 py-2 border border-[#E0E0E0] text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-[6px] bg-surface-container-low text-on-surface"
                 />
               </div>
 
@@ -711,13 +695,13 @@ export default function HostDashboard() {
                 <button
                   type="button"
                   onClick={() => setIsIncidentOpen(false)}
-                  className="flex-1 border border-outline-variant text-on-surface-variant font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-none hover:bg-slate-100"
+                  className="flex-1 border border-[#E0E0E0] text-on-surface-variant font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-[6px] hover:bg-slate-100"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-error text-on-error font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-none hover:bg-error/95"
+                  className="flex-1 bg-ember text-on-error font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-[6px] hover:bg-ember/95"
                 >
                   Log Incident
                 </button>
@@ -729,18 +713,18 @@ export default function HostDashboard() {
 
       {/* Modal 3: Simulated Call/Message alert */}
       {simulatedAction && (
-        <div className="fixed bottom-[150px] left-4 right-4 bg-inverse-surface border border-outline-variant p-4 text-white flex justify-between items-center shadow-2xl z-50 border-l-4 border-l-primary rounded-none">
+        <div className="fixed bottom-[150px] left-4 right-4 bg-inverse-surface border border-[#E0E0E0] p-4 text-white flex justify-between items-center shadow-2xl z-50 border-l-4 border-l-primary rounded-[6px]">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
             {simulatedAction.type === 'call' ? (
-              <Phone className="w-4 h-4 text-primary" />
+              <Icon name="phone" size={16} color="#FF5F0F" />
             ) : (
-              <MessageSquare className="w-4 h-4 text-primary" />
+              <Icon name="chat" size={16} color="#FF5F0F" />
             )}
             <span>Simulating {simulatedAction.type} with: {simulatedAction.target}</span>
           </div>
           <button 
             onClick={() => setSimulatedAction(null)}
-            className="text-xs font-extrabold uppercase hover:underline text-primary"
+            className="text-xs font-extrabold uppercase hover:underline text-sunrise"
           >
             Dismiss
           </button>
@@ -750,10 +734,10 @@ export default function HostDashboard() {
       {/* Modal 4: Emergency Call Confirmation */}
       {isEmergencyOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white border-2 border-black rounded-none shadow-2xl w-full max-w-sm overflow-hidden border-t-8 border-t-error">
+          <div className="bg-white border-2 border-black rounded-[6px] shadow-2xl w-full max-w-sm overflow-hidden border-t-8 border-t-error">
             <div className="p-6 space-y-4 text-center">
-              <div className="w-16 h-16 bg-error/15 border-2 border-error text-error flex items-center justify-center rounded-none mx-auto mb-2">
-                <AlertOctagon className="w-8 h-8" />
+              <div className="w-16 h-16 bg-ember/15 border-2 border-error text-error flex items-center justify-center rounded-[6px] mx-auto mb-2">
+                <Icon name="report" size={32} color="#C24B0A" />
               </div>
               <h3 className="font-h3 text-h3 text-error uppercase font-extrabold">Confirm Emergency</h3>
               <p className="text-xs text-on-surface-variant leading-relaxed">
@@ -761,19 +745,19 @@ export default function HostDashboard() {
               </p>
             </div>
             
-            <div className="p-4 border-t border-outline-variant bg-slate-50 flex gap-2">
+            <div className="p-4 border-t border-[#E0E0E0] bg-slate-50 flex gap-2">
               <button
                 onClick={() => {
                   setIsEmergencyOpen(false);
                   setSimulatedAction({ type: 'call', target: 'Basecamp operations Emergency Response Team' });
                 }}
-                className="flex-1 bg-error text-on-error font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-none hover:bg-error/95"
+                className="flex-1 bg-ember text-on-error font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-[6px] hover:bg-ember/95"
               >
                 Call Hotline
               </button>
               <button
                 onClick={() => setIsEmergencyOpen(false)}
-                className="flex-1 border border-outline-variant text-on-surface-variant font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-none hover:bg-slate-100"
+                className="flex-1 border border-[#E0E0E0] text-on-surface-variant font-bold min-h-[48px] text-xs uppercase tracking-wider rounded-[6px] hover:bg-slate-100"
               >
                 Cancel
               </button>

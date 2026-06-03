@@ -3,15 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  Compass, 
-  CheckSquare, 
-  Users, 
-  Settings,
-  ShieldAlert,
-  Briefcase
-} from 'lucide-react';
+import { Icon } from '../ui/icon';
 import { cn } from '@/lib/utils';
 
 // Serializable NavItem interface
@@ -25,15 +17,15 @@ interface SidebarLinksProps {
   navItems: NavItem[];
 }
 
-// Icon dictionary mapped to static components
-const iconMap: Record<NavItem['iconName'], React.ComponentType<{ className?: string }>> = {
-  Dashboard: LayoutDashboard,
-  Work: CheckSquare,
-  Trips: Compass,
-  People: Users,
-  Settings: Settings,
-  SYSTEM: ShieldAlert,
-  DEPARTMENTS: Briefcase,
+// Icon dictionary mapped to Material Symbol names
+const iconMap: Record<NavItem['iconName'], string> = {
+  Dashboard: 'dashboard',
+  Work: 'task_alt',
+  Trips: 'luggage',
+  People: 'groups',
+  Settings: 'settings',
+  SYSTEM: 'admin_panel_settings',
+  DEPARTMENTS: 'business',
 };
 
 export function SidebarLinks({ navItems }: SidebarLinksProps) {
@@ -42,7 +34,7 @@ export function SidebarLinks({ navItems }: SidebarLinksProps) {
   return (
     <nav className="flex-1 mt-6 px-4 space-y-1">
       {navItems.map((item) => {
-        const Icon = iconMap[item.iconName] || Settings;
+        const iconName = iconMap[item.iconName] || 'settings';
         
         // Match logic: highlights if active or starts with sub-routes
         const isActive = 
@@ -57,14 +49,19 @@ export function SidebarLinks({ navItems }: SidebarLinksProps) {
             key={item.name}
             href={item.href}
             className={cn(
-              "flex items-center gap-3 px-6 py-3 rounded-none transition-all duration-150 border-l-4",
+              "flex items-center gap-3 px-4 py-2.5 rounded-[6px] transition-all duration-150 border-l-4",
               isActive
-                ? "text-white border-primary bg-primary/10 font-bold"
-                : "text-[#9CA3AF] border-transparent hover:text-white hover:bg-white/5"
+                ? "text-sunrise border-sunrise bg-sunrise/10 font-poppins font-semibold"
+                : "text-[#9E9E9E] border-transparent hover:text-[#FAF9F2] hover:bg-[#FAF9F2]/5 font-poppins font-medium"
             )}
           >
-            <Icon className="w-5 h-5" />
-            <span className="text-body">{item.name}</span>
+            <Icon 
+              name={iconName} 
+              size={20} 
+              color={isActive ? '#FF5F0F' : '#9E9E9E'} 
+              className={isActive ? '' : 'group-hover:text-[#FAF9F2]'}
+            />
+            <span className="text-sm">{item.name}</span>
           </Link>
         );
       })}

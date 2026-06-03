@@ -2,7 +2,7 @@ import React from 'react';
 import { ProjectCard } from '@/components/work/project-card';
 import { TaskList, Task } from '@/components/work/task-list';
 import { WorkControls } from '@/components/work/work-controls';
-import { ChevronRight, PlusCircle } from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 import { Metadata } from 'next';
 import { getProjects, getTasks } from '@/actions/work';
 import { getUsers } from '@/actions/users';
@@ -159,12 +159,12 @@ export default async function WorkManagementPage() {
       {/* Page Header Breadcrumbs & Action Bar */}
       <section className="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xxl">
         <div>
-          <nav className="flex items-center text-label text-outline mb-xs">
+          <nav className="flex items-center text-xs font-poppins text-[#9E9E9E] mb-xs">
             <span>Work</span>
-            <ChevronRight className="w-3.5 h-3.5 mx-xs" />
-            <span className="text-on-surface-variant font-medium">Projects & Tasks</span>
+            <Icon name="chevron_right" size={14} color="#9E9E9E" className="mx-xs" />
+            <span className="text-dusk font-medium">Projects & Tasks</span>
           </nav>
-          <h2 className="text-h1 text-on-background">Projects & Tasks</h2>
+          <h2 className="text-3xl font-poppins font-bold text-dusk">Projects & Tasks</h2>
         </div>
         
         {/* Actions Buttons / Work Controls */}
@@ -176,7 +176,7 @@ export default async function WorkManagementPage() {
 
       {/* Project Overview Cards Grid or Brutalist Empty State */}
       {formattedProjects.length === 0 ? (
-        <div className="p-8 border border-slate-200 bg-slate-50 text-center text-slate-500 font-semibold uppercase text-sm mb-xxl">
+        <div className="p-8 border border-[#E0E0E0] bg-white rounded-lg shadow-sm text-center text-[#555555] font-poppins font-semibold uppercase text-xs mb-xxl">
           No Active Projects. Initialize Database.
         </div>
       ) : (
@@ -202,10 +202,10 @@ export default async function WorkManagementPage() {
 
       {/* Contextual Floating Action Button (FAB) */}
       <button 
-        className="fixed bottom-xl right-xl w-14 h-14 bg-primary hover:bg-primary-container rounded-full shadow-2xl flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all z-50 focus:outline-none"
+        className="fixed bottom-xl right-xl w-14 h-14 bg-sunrise hover:bg-ember rounded-full shadow-lg flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all z-50 focus:outline-none focus:ring-2 focus:ring-sunrise focus:ring-offset-2"
         title="Add new task"
       >
-        <PlusCircle className="w-7 h-7" />
+        <Icon name="add" size={28} color="#FFFFFF" />
       </button>
     </div>
   );

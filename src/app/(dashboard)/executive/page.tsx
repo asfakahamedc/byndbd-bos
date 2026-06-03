@@ -3,18 +3,7 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import {
-  Clock,
-  Calendar,
-  Check,
-  MoreHorizontal,
-  Send,
-  Plus,
-  ChevronRight,
-  Download,
-  X,
-  MessageCircle
-} from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
 // ============================================================================
@@ -179,7 +168,7 @@ export default function ExecutiveDashboard() {
 
   // Priority badge styling helpers
   const priorityInfo = {
-    critical: { label: '🔴 CRITICAL', class: 'bg-error/10 text-error border-error/20' },
+    critical: { label: '🔴 CRITICAL', class: 'bg-ember/10 text-error border-error/20' },
     high: { label: '🟠 HIGH', class: 'bg-orange-500/10 text-orange-600 border-orange-500/20' },
     medium: { label: '🟡 MEDIUM', class: 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20' },
     low: { label: '🟢 LOW', class: 'bg-success/10 text-success border-success/20' }
@@ -275,22 +264,22 @@ export default function ExecutiveDashboard() {
   return (
     <div className="space-y-lg relative">
       {/* 1. Dashboard Header */}
-      <header className="flex flex-col md:flex-row md:items-end justify-between gap-md pb-lg border-b border-outline-variant">
+      <header className="flex flex-col md:flex-row md:items-end justify-between gap-md pb-lg border-b border-[#E0E0E0]">
         <div>
           <nav className="flex items-center gap-2 text-on-surface-variant text-label mb-2">
             <span>Dashboard</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-primary font-semibold">Executive</span>
+            <Icon name="chevron_right" className="w-3.5 h-3.5" />
+            <span className="text-sunrise font-semibold">Executive</span>
           </nav>
           <h1 className="text-h1 font-h1 text-on-surface">Good morning, Rahat Ahmed</h1>
           <div className="flex items-center gap-4 mt-2">
             <p className="text-on-surface-variant font-body flex items-center gap-1.5">
-              <Calendar className="w-4 h-4 text-on-surface-variant" />
+              <Icon name="calendar_today" className="w-4 h-4 text-on-surface-variant" />
               Monday, December 16, 2024
             </p>
-            <div className="w-1.5 h-1.5 bg-outline-variant rounded-none"></div>
-            <p className="text-primary font-h4 text-[14px] flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-primary" />
+            <div className="w-1.5 h-1.5 bg-outline-variant rounded-[6px]"></div>
+            <p className="text-sunrise font-h4 text-[14px] flex items-center gap-1.5">
+              <Icon name="schedule" className="w-4 h-4 text-sunrise" />
               {tasks.filter(t => t.progress < 100).length} tasks due today
             </p>
           </div>
@@ -298,15 +287,15 @@ export default function ExecutiveDashboard() {
 
         {/* Filters control block */}
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex bg-surface-container-low border border-outline-variant p-1 rounded-none">
+          <div className="flex bg-surface-container-low border border-[#E0E0E0] p-1 rounded-[6px]">
             {(['all', 'tasks', 'deadlines', 'updates'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveFilter(tab)}
                 className={cn(
-                  "px-3 py-1.5 text-label font-bold uppercase transition-colors rounded-none",
+                  "px-3 py-1.5 text-label font-bold uppercase transition-colors rounded-[6px]",
                   activeFilter === tab
-                    ? "bg-primary text-on-primary"
+                    ? "bg-sunrise text-white"
                     : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/50"
                 )}
               >
@@ -315,8 +304,8 @@ export default function ExecutiveDashboard() {
             ))}
           </div>
           
-          <button className="flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-none font-h4 text-[14px] bg-white hover:bg-surface-container transition-colors">
-            <Download className="w-4 h-4" />
+          <button className="flex items-center gap-2 px-4 py-2 border border-[#E0E0E0] rounded-[6px] font-h4 text-[14px] bg-white hover:bg-surface-container transition-colors">
+            <Icon name="file_download" size={16} color="#555555" />
             Export PDF
           </button>
         </div>
@@ -336,7 +325,7 @@ export default function ExecutiveDashboard() {
         >
           <div className="flex items-center justify-between">
             <h2 className="text-h2 font-h2 text-on-surface">My Tasks Today</h2>
-            <button className="text-primary font-h4 text-[14px] hover:underline uppercase tracking-wide">
+            <button className="text-sunrise font-h4 text-[14px] hover:underline uppercase tracking-wide">
               View All Tasks
             </button>
           </div>
@@ -346,7 +335,7 @@ export default function ExecutiveDashboard() {
               <Card 
                 key={task.id} 
                 className={cn(
-                  "p-6 relative overflow-hidden transition-all duration-200 border-l-4 border-y border-r border-outline-variant",
+                  "p-6 relative overflow-hidden transition-all duration-200 border-l-4 border-y border-r border-[#E0E0E0]",
                   task.priority === 'critical' && "border-l-error hover:shadow-md",
                   task.priority === 'high' && "border-l-orange-500 hover:shadow-md",
                   task.priority === 'medium' && "border-l-yellow-500 opacity-90 hover:opacity-100 hover:shadow-md",
@@ -359,18 +348,18 @@ export default function ExecutiveDashboard() {
                     <div className="flex items-center flex-wrap gap-3">
                       <Badge 
                         variant="neutral" 
-                        className={cn("rounded-none border px-2 py-0.5", priorityInfo[task.priority].class)}
+                        className={cn("rounded-[6px] border px-2 py-0.5", priorityInfo[task.priority].class)}
                       >
                         {priorityInfo[task.priority].label}
                       </Badge>
                       
                       <span className="text-label text-on-surface-variant flex items-center gap-1 font-medium">
-                        <Clock className="w-3.5 h-3.5 text-on-surface-variant" />
+                        <Icon name="schedule" className="w-3.5 h-3.5 text-on-surface-variant" />
                         {task.timeRemaining}
                       </span>
                       
                       <span className="text-label text-on-surface-variant flex items-center gap-1 font-medium">
-                        <Calendar className="w-3.5 h-3.5 text-on-surface-variant" />
+                        <Icon name="calendar_today" className="w-3.5 h-3.5 text-on-surface-variant" />
                         {task.assignedDate}
                       </span>
                     </div>
@@ -379,7 +368,7 @@ export default function ExecutiveDashboard() {
                     <p className="text-on-surface-variant text-body max-w-2xl">{task.description}</p>
                     
                     {/* Status badge representation */}
-                    <div className="text-label font-bold text-primary mt-1">
+                    <div className="text-label font-bold text-sunrise mt-1">
                       Status: [{task.status}]
                     </div>
                   </div>
@@ -388,41 +377,41 @@ export default function ExecutiveDashboard() {
                     {task.progress === 0 ? (
                       <button 
                         onClick={() => handleStartTask(task.id)}
-                        className="px-6 py-2 border border-primary text-primary hover:bg-primary/5 rounded-none font-h4 text-[13px] transition-all font-bold uppercase tracking-wider"
+                        className="px-6 py-2 border border-sunrise text-sunrise hover:bg-sunrise/5 rounded-[6px] font-h4 text-[13px] transition-all font-bold uppercase tracking-wider"
                       >
                         Start
                       </button>
                     ) : task.progress < 100 ? (
                       <button 
                         onClick={() => handleMarkAsDone(task.id)}
-                        className="px-4 py-2 bg-primary text-on-primary rounded-none font-h4 text-[13px] hover:brightness-110 font-bold uppercase tracking-wider transition-all"
+                        className="px-4 py-2 bg-sunrise text-white rounded-[6px] font-h4 text-[13px] hover:brightness-110 font-bold uppercase tracking-wider transition-all"
                       >
                         Mark as Done
                       </button>
                     ) : (
                       <div className="flex items-center gap-1 text-success font-bold text-label bg-success/5 border border-success/15 px-3 py-2">
-                        <Check className="w-4 h-4" />
+                        <Icon name="check_circle" size={16} color="#2E7D32" />
                         Completed
                       </div>
                     )}
                     
-                    <button className="p-2 border border-outline-variant rounded-none hover:bg-surface-container transition-colors">
-                      <MoreHorizontal className="w-5 h-5 text-on-surface-variant" />
+                    <button className="p-2 border border-[#E0E0E0] rounded-[6px] hover:bg-surface-container transition-colors">
+                      <Icon name="more_horiz" className="w-5 h-5 text-on-surface-variant" />
                     </button>
                   </div>
                 </div>
 
                 {/* Progress Bar & Teammates */}
                 {task.progress > 0 && (
-                  <div className="mt-6 pt-6 border-t border-outline-variant flex items-center gap-6">
+                  <div className="mt-6 pt-6 border-t border-[#E0E0E0] flex items-center gap-6">
                     <div className="flex-1">
                       <div className="flex justify-between text-label mb-2">
                         <span className="text-on-surface-variant font-medium">Progress</span>
                         <span className="text-on-surface font-bold">{task.progress}%</span>
                       </div>
-                      <div className="h-2 bg-surface-container rounded-none overflow-hidden border border-outline-variant/30">
+                      <div className="h-2 bg-surface-container rounded-[6px] overflow-hidden border border-[#E0E0E0]/30">
                         <div 
-                          className="h-full bg-primary transition-all duration-300" 
+                          className="h-full bg-sunrise transition-all duration-300" 
                           style={{ width: `${task.progress}%` }}
                         ></div>
                       </div>
@@ -433,7 +422,7 @@ export default function ExecutiveDashboard() {
                         {task.avatars.map((url, idx) => (
                           <img 
                             key={idx} 
-                            className="w-8 h-8 rounded-none border border-white object-cover" 
+                            className="w-8 h-8 rounded-[6px] border border-white object-cover" 
                             src={url} 
                             alt="Teammate avatar" 
                           />
@@ -444,7 +433,7 @@ export default function ExecutiveDashboard() {
                 )}
                 
                 <div className="mt-4 flex gap-3 text-label">
-                  <button className="text-primary hover:underline font-bold">[View Details]</button>
+                  <button className="text-sunrise hover:underline font-bold">[View Details]</button>
                 </div>
               </Card>
             ))}
@@ -465,10 +454,10 @@ export default function ExecutiveDashboard() {
             "space-y-4",
             activeFilter === 'updates' ? "hidden" : ""
           )}>
-            <Card className="bg-white rounded-none border border-outline-variant overflow-hidden">
-              <div className="p-6 border-b border-outline-variant flex items-center justify-between">
+            <Card className="bg-white rounded-[6px] border border-[#E0E0E0] overflow-hidden">
+              <div className="p-6 border-b border-[#E0E0E0] flex items-center justify-between">
                 <h2 className="font-h4 text-h4 text-on-surface">This Week Deadlines</h2>
-                <span className="text-primary font-bold text-h4 bg-primary/5 px-2.5 py-1 border border-primary/10">
+                <span className="text-sunrise font-bold text-h4 bg-sunrise/5 px-2.5 py-1 border border-sunrise/10">
                   {deadlineCompletionRate}% Done
                 </span>
               </div>
@@ -483,19 +472,19 @@ export default function ExecutiveDashboard() {
                     >
                       <div className="flex flex-col items-center">
                         <div className={cn(
-                          "w-8 h-8 rounded-none flex items-center justify-center border transition-all duration-200",
+                          "w-8 h-8 rounded-[6px] flex items-center justify-center border transition-all duration-200",
                           dl.status === 'Completed' 
                             ? "bg-success/15 border-success text-success" 
                             : dl.status === 'In Progress'
                               ? "bg-orange-500 border-orange-600 text-white"
-                              : "bg-slate-100 border-outline-variant text-on-surface-variant group-hover:border-primary"
+                              : "bg-slate-100 border-[#E0E0E0] text-on-surface-variant group-hover:border-sunrise"
                         )}>
                           {dl.status === 'Completed' ? (
-                            <Check className="w-4 h-4 text-success" />
+                            <Icon name="check_circle" size={16} color="#2E7D32" />
                           ) : dl.status === 'In Progress' ? (
-                            <div className="w-2.5 h-2.5 rounded-none bg-white animate-pulse"></div>
+                            <div className="w-2.5 h-2.5 rounded-[6px] bg-white animate-pulse"></div>
                           ) : (
-                            <div className="w-2 h-2 rounded-none bg-transparent"></div>
+                            <div className="w-2 h-2 rounded-[6px] bg-transparent"></div>
                           )}
                         </div>
                         <div className="w-0.5 h-full bg-outline-variant/50 mt-2"></div>
@@ -543,17 +532,17 @@ export default function ExecutiveDashboard() {
               {mentions.map((mention) => (
                 <div 
                   key={mention.id} 
-                  className="bg-white border border-outline-variant rounded-none p-4 hover:border-primary/30 transition-colors shadow-sm"
+                  className="bg-white border border-[#E0E0E0] rounded-[6px] p-4 hover:border-sunrise/30 transition-colors shadow-sm"
                 >
                   <div className="flex items-start gap-3">
                     {mention.avatarUrl ? (
                       <img 
-                        className="w-10 h-10 rounded-none bg-outline-variant object-cover border border-outline-variant" 
+                        className="w-10 h-10 rounded-[6px] bg-outline-variant object-cover border border-[#E0E0E0]" 
                         src={mention.avatarUrl} 
                         alt={mention.author}
                       />
                     ) : (
-                      <div className="w-10 h-10 bg-primary/10 border border-primary/20 text-primary flex items-center justify-center font-bold text-xs rounded-none">
+                      <div className="w-10 h-10 bg-sunrise/10 border border-sunrise/20 text-sunrise flex items-center justify-center font-bold text-xs rounded-[6px]">
                         {mention.author[0]}
                       </div>
                     )}
@@ -566,19 +555,19 @@ export default function ExecutiveDashboard() {
                         <span className="text-label text-on-surface-variant font-normal">{mention.timeAgo}</span>
                       </div>
                       
-                      <p className="text-primary font-h4 text-[13px] truncate mt-0.5 font-bold">
+                      <p className="text-sunrise font-h4 text-[13px] truncate mt-0.5 font-bold">
                         {mention.project}
                       </p>
                       
-                      <p className="text-on-surface-variant text-label font-normal mt-2 italic leading-relaxed bg-slate-50 p-2 border-l-2 border-primary/30">
+                      <p className="text-on-surface-variant text-label font-normal mt-2 italic leading-relaxed bg-slate-50 p-2 border-l-2 border-sunrise/30">
                         {mention.content}
                       </p>
 
                       {/* Display replies */}
                       {mention.replies && mention.replies.length > 0 && (
-                        <div className="mt-3 pl-4 border-l border-outline-variant/60 space-y-3">
+                        <div className="mt-3 pl-4 border-l border-[#E0E0E0]/60 space-y-3">
                           {mention.replies.map((rep) => (
-                            <div key={rep.id} className="text-xs bg-slate-50/50 p-2 border-l border-primary/20">
+                            <div key={rep.id} className="text-xs bg-slate-50/50 p-2 border-l border-sunrise/20">
                               <p className="font-bold text-on-surface">
                                 {rep.author} <span className="font-normal text-on-surface-variant">({rep.timeAgo})</span>
                               </p>
@@ -591,13 +580,13 @@ export default function ExecutiveDashboard() {
                       {/* Reply Form Trigger & Form */}
                       <div className="flex flex-col gap-2 mt-3">
                         {replyToId === mention.id ? (
-                          <div className="flex flex-col gap-2 bg-slate-50 p-2 border border-outline-variant/40">
+                          <div className="flex flex-col gap-2 bg-slate-50 p-2 border border-[#E0E0E0]/40">
                             <textarea
                               rows={2}
                               value={replyText}
                               onChange={(e) => setReplyText(e.target.value)}
                               placeholder="Write a response..."
-                              className="w-full text-xs p-2 bg-white border border-outline-variant focus:outline-none focus:ring-1 focus:ring-primary rounded-none text-on-surface"
+                              className="w-full text-xs p-2 bg-white border border-[#E0E0E0] focus:outline-none focus:ring-1 focus:ring-primary rounded-[6px] text-on-surface"
                             />
                             <div className="flex justify-end gap-2">
                               <button 
@@ -608,9 +597,9 @@ export default function ExecutiveDashboard() {
                               </button>
                               <button 
                                 onClick={() => handleSendReply(mention.id)}
-                                className="px-3 py-1 bg-primary text-on-primary font-bold text-[11px] hover:bg-primary/90 rounded-none flex items-center gap-1 uppercase tracking-wider"
+                                className="px-3 py-1 bg-sunrise text-white font-bold text-[11px] hover:bg-sunrise/90 rounded-[6px] flex items-center gap-1 uppercase tracking-wider"
                               >
-                                <Send className="w-3 h-3" />
+                                <Icon name="send" size={12} color="#FFFFFF" />
                                 Send
                               </button>
                             </div>
@@ -622,7 +611,7 @@ export default function ExecutiveDashboard() {
                                 setReplyToId(mention.id);
                                 setReplyText('');
                               }}
-                              className="text-primary text-label font-bold hover:underline"
+                              className="text-sunrise text-label font-bold hover:underline"
                             >
                               [Reply]
                             </button>
@@ -640,7 +629,7 @@ export default function ExecutiveDashboard() {
                 </div>
               ))}
 
-              <button className="w-full py-3 text-on-surface-variant text-label border border-dashed border-outline-variant rounded-none hover:bg-surface-container transition-colors font-bold uppercase tracking-wide">
+              <button className="w-full py-3 text-on-surface-variant text-label border border-dashed border-[#E0E0E0] rounded-[6px] hover:bg-surface-container transition-colors font-bold uppercase tracking-wide">
                 View History
               </button>
             </div>
@@ -652,10 +641,10 @@ export default function ExecutiveDashboard() {
       <div className="fixed bottom-8 right-8 z-50">
         <button 
           onClick={() => setIsTaskModalOpen(true)}
-          className="w-14 h-14 bg-primary text-on-primary rounded-none shadow-2xl flex items-center justify-center transition-transform hover:scale-105 active:scale-95 group border-2 border-black"
+          className="w-14 h-14 bg-sunrise text-white rounded-[6px] shadow-2xl flex items-center justify-center transition-transform hover:scale-105 active:scale-95 group border-2 border-black"
           title="Create New Task"
         >
-          <Plus className="w-7 h-7 text-white" />
+          <Icon name="add" className="w-7 h-7 text-white" />
         </button>
       </div>
 
@@ -664,17 +653,17 @@ export default function ExecutiveDashboard() {
       {/* New Task Overlay */}
       {isTaskModalOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
-          <div className="bg-white border-2 border-black rounded-none shadow-2xl w-full max-w-lg overflow-hidden">
-            <div className="bg-primary text-on-primary px-6 py-4 flex justify-between items-center border-b-2 border-black">
+          <div className="bg-white border-2 border-black rounded-[6px] shadow-2xl w-full max-w-lg overflow-hidden">
+            <div className="bg-sunrise text-white px-6 py-4 flex justify-between items-center border-b-2 border-black">
               <h3 className="font-h3 text-h3 flex items-center gap-2">
-                <Plus className="w-5 h-5" />
+                <Icon name="add" className="w-5 h-5" />
                 CREATE NEW TASK
               </h3>
               <button 
                 onClick={() => setIsTaskModalOpen(false)}
-                className="text-on-primary hover:text-white p-1 hover:bg-white/10"
+                className="text-white hover:text-white p-1 hover:bg-white/10"
               >
-                <X className="w-5 h-5" />
+                <Icon name="close" className="w-5 h-5" />
               </button>
             </div>
             
@@ -689,7 +678,7 @@ export default function ExecutiveDashboard() {
                   value={newTaskTitle}
                   onChange={(e) => setNewTaskTitle(e.target.value)}
                   placeholder="e.g. Publish Marketing Material"
-                  className="w-full px-3 py-2 bg-surface-container-low border border-outline-variant text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-none text-on-surface"
+                  className="w-full px-3 py-2 bg-surface-container-low border border-[#E0E0E0] text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-[6px] text-on-surface"
                 />
               </div>
 
@@ -702,7 +691,7 @@ export default function ExecutiveDashboard() {
                   value={newTaskDesc}
                   onChange={(e) => setNewTaskDesc(e.target.value)}
                   placeholder="Provide context or constraints..."
-                  className="w-full px-3 py-2 bg-surface-container-low border border-outline-variant text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-none text-on-surface"
+                  className="w-full px-3 py-2 bg-surface-container-low border border-[#E0E0E0] text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-[6px] text-on-surface"
                 />
               </div>
 
@@ -714,7 +703,7 @@ export default function ExecutiveDashboard() {
                   <select
                     value={newTaskPriority}
                     onChange={(e) => setNewTaskPriority(e.target.value as 'critical' | 'high' | 'medium' | 'low')}
-                    className="w-full px-3 py-2 bg-surface-container-low border border-outline-variant text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-none text-on-surface"
+                    className="w-full px-3 py-2 bg-surface-container-low border border-[#E0E0E0] text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-[6px] text-on-surface"
                   >
                     <option value="critical">🔴 Critical</option>
                     <option value="high">🟠 High</option>
@@ -731,22 +720,22 @@ export default function ExecutiveDashboard() {
                     value={newTaskTime}
                     onChange={(e) => setNewTaskTime(e.target.value)}
                     placeholder="e.g. 5 hours left"
-                    className="w-full px-3 py-2 bg-surface-container-low border border-outline-variant text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-none text-on-surface"
+                    className="w-full px-3 py-2 bg-surface-container-low border border-[#E0E0E0] text-body focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-[6px] text-on-surface"
                   />
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-outline-variant flex justify-end gap-3">
+              <div className="pt-4 border-t border-[#E0E0E0] flex justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setIsTaskModalOpen(false)}
-                  className="px-4 py-2 border border-outline-variant text-on-surface hover:bg-slate-50 font-bold rounded-none text-label uppercase tracking-wider"
+                  className="px-4 py-2 border border-[#E0E0E0] text-on-surface hover:bg-slate-50 font-bold rounded-[6px] text-label uppercase tracking-wider"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-primary text-on-primary hover:bg-primary/90 font-bold rounded-none text-label uppercase tracking-wider"
+                  className="px-5 py-2 bg-sunrise text-white hover:bg-sunrise/90 font-bold rounded-[6px] text-label uppercase tracking-wider"
                 >
                   Save Task
                 </button>
@@ -759,43 +748,43 @@ export default function ExecutiveDashboard() {
       {/* Discussion History Modal */}
       {activeDiscussionId && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white border-2 border-black rounded-none shadow-2xl w-full max-w-xl overflow-hidden">
-            <div className="bg-primary text-on-primary px-6 py-4 flex justify-between items-center border-b-2 border-black">
+          <div className="bg-white border-2 border-black rounded-[6px] shadow-2xl w-full max-w-xl overflow-hidden">
+            <div className="bg-sunrise text-white px-6 py-4 flex justify-between items-center border-b-2 border-black">
               <h3 className="font-h3 text-h3 uppercase tracking-wider flex items-center gap-2">
-                <MessageCircle className="w-5 h-5" />
+                <Icon name="forum" size={20} color="#FFFFFF" />
                 Discussion Thread
               </h3>
               <button 
                 onClick={() => setActiveDiscussionId(null)}
-                className="text-on-primary hover:text-white p-1 hover:bg-white/10"
+                className="text-white hover:text-white p-1 hover:bg-white/10"
               >
-                <X className="w-5 h-5" />
+                <Icon name="close" className="w-5 h-5" />
               </button>
             </div>
             
             <div className="p-6 space-y-4 max-h-[400px] overflow-y-auto">
               {mentions.filter(m => m.id === activeDiscussionId).map(m => (
                 <div key={m.id} className="space-y-4">
-                  <div className="flex items-start gap-3 bg-slate-50 p-4 border border-outline-variant">
+                  <div className="flex items-start gap-3 bg-slate-50 p-4 border border-[#E0E0E0]">
                     <img 
-                      className="w-10 h-10 rounded-none bg-outline-variant object-cover"
+                      className="w-10 h-10 rounded-[6px] bg-outline-variant object-cover"
                       src={m.avatarUrl}
                       alt={m.author}
                     />
                     <div>
                       <p className="font-bold text-on-surface">{m.author} <span className="font-normal text-on-surface-variant">initiated the thread</span></p>
-                      <p className="text-label text-primary font-bold mt-0.5">{m.project}</p>
-                      <p className="text-on-surface mt-2 text-body italic bg-white p-2 border-l-2 border-primary">{m.content}</p>
+                      <p className="text-label text-sunrise font-bold mt-0.5">{m.project}</p>
+                      <p className="text-on-surface mt-2 text-body italic bg-white p-2 border-l-2 border-sunrise">{m.content}</p>
                     </div>
                   </div>
 
                   {m.replies.length === 0 ? (
                     <p className="text-xs text-on-surface-variant italic text-center py-4">No replies yet. Use the reply tool on the main view to start.</p>
                   ) : (
-                    <div className="space-y-3 pl-6 border-l-2 border-outline-variant">
+                    <div className="space-y-3 pl-6 border-l-2 border-[#E0E0E0]">
                       <p className="text-[10px] uppercase font-bold text-on-surface-variant">Replies</p>
                       {m.replies.map(r => (
-                        <div key={r.id} className="bg-slate-50/50 p-3 border border-outline-variant/60">
+                        <div key={r.id} className="bg-slate-50/50 p-3 border border-[#E0E0E0]/60">
                           <p className="font-bold text-xs">{r.author} <span className="font-normal text-on-surface-variant">({r.timeAgo})</span></p>
                           <p className="text-on-surface-variant mt-1 text-xs">{r.content}</p>
                         </div>
@@ -806,10 +795,10 @@ export default function ExecutiveDashboard() {
               ))}
             </div>
             
-            <div className="p-6 border-t border-outline-variant bg-slate-50 flex justify-end">
+            <div className="p-6 border-t border-[#E0E0E0] bg-slate-50 flex justify-end">
               <button
                 onClick={() => setActiveDiscussionId(null)}
-                className="px-5 py-2 bg-primary text-on-primary hover:bg-primary/90 font-bold rounded-none text-label uppercase tracking-wider"
+                className="px-5 py-2 bg-sunrise text-white hover:bg-sunrise/90 font-bold rounded-[6px] text-label uppercase tracking-wider"
               >
                 Close Thread
               </button>

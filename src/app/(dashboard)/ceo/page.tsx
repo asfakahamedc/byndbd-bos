@@ -3,18 +3,7 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Filter, 
-  CheckSquare, 
-  Compass, 
-  Users, 
-  AlertTriangle, 
-  CheckCircle, 
-  CheckCircle2, 
-  RefreshCw, 
-  AlertCircle, 
-  Eye
-} from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
 // ============================================================================
@@ -294,15 +283,15 @@ export default function CEODashboard() {
         
         <div className="flex items-center gap-3">
           {/* Filter Segment */}
-          <div className="flex bg-surface-container-low border border-outline-variant rounded-none p-1 gap-1">
+          <div className="flex bg-surface-container-low border border-[#E0E0E0] rounded-[6px] p-1 gap-1">
             {(['week', 'month', 'quarter'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setFilter(tab)}
                 className={cn(
-                  "px-3 py-1.5 text-label font-bold transition-all uppercase rounded-none",
+                  "px-3 py-1.5 text-label font-bold transition-all uppercase rounded-[6px]",
                   filter === tab
-                    ? "bg-primary text-on-primary font-bold shadow-sm"
+                    ? "bg-sunrise text-white font-bold shadow-sm"
                     : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/40"
                 )}
               >
@@ -313,12 +302,15 @@ export default function CEODashboard() {
 
           <button 
             onClick={handleRefresh}
-            className="p-2.5 bg-white border border-outline-variant hover:bg-slate-50 transition-all rounded-none flex items-center justify-center" 
+            className="p-2.5 bg-white border border-[#E0E0E0] hover:bg-slate-50 transition-all rounded-[6px] flex items-center justify-center" 
             title="Refresh Data"
           >
-            <RefreshCw 
+            <Icon 
+              name="sync" 
+              size={16}
+              color="#555555"
               className={cn(
-                "w-4 h-4 text-on-surface-variant transition-transform duration-500", 
+                "transition-transform duration-500", 
                 isRefreshing && "rotate-180"
               )} 
             />
@@ -332,39 +324,39 @@ export default function CEODashboard() {
         <Card className="p-lg flex flex-col justify-between h-full min-h-[220px]">
           <div className="flex justify-between items-start mb-md">
             <span className="text-on-surface-variant text-label font-bold uppercase tracking-wider">Operations Flow</span>
-            <Filter className="w-5 h-5 text-primary" />
+            <Icon name="filter_list" size={20} color="#FF5F0F" />
           </div>
           <div className="space-y-sm my-auto w-full">
-            <div className="flex justify-between items-center border-b border-outline-variant/60 pb-1">
+            <div className="flex justify-between items-center border-b border-[#E0E0E0]/60 pb-1">
               <span className="text-body text-on-surface-variant">Inquiries</span>
               <span className="font-bold text-h4">{activeData.metrics.inquiries}</span>
             </div>
-            <div className="flex justify-between items-center border-b border-outline-variant/60 pb-1">
+            <div className="flex justify-between items-center border-b border-[#E0E0E0]/60 pb-1">
               <span className="text-body text-on-surface-variant">Quotes Sent</span>
               <span className="font-bold text-h4">{activeData.metrics.quotes}</span>
             </div>
-            <div className="flex justify-between items-center border-b border-outline-variant/60 pb-1">
+            <div className="flex justify-between items-center border-b border-[#E0E0E0]/60 pb-1">
               <span className="text-body text-on-surface-variant">Bookings</span>
               <span className="font-bold text-h4">{activeData.metrics.bookings}</span>
             </div>
             <div className="grid grid-cols-2 gap-2 pt-2">
-              <div className="bg-primary/5 p-2 border border-primary/10 rounded-none text-center">
-                <span className="text-[9px] text-primary uppercase font-bold block">Conversion</span>
-                <span className="text-h3 font-extrabold text-primary">{activeData.metrics.conversionRate}%</span>
+              <div className="bg-sunrise/5 p-2 border border-sunrise/10 rounded-[6px] text-center">
+                <span className="text-[9px] text-sunrise uppercase font-bold block">Conversion</span>
+                <span className="text-h3 font-extrabold text-sunrise">{activeData.metrics.conversionRate}%</span>
               </div>
-              <div className="bg-success/5 p-2 border border-success/10 rounded-none text-center">
+              <div className="bg-success/5 p-2 border border-success/10 rounded-[6px] text-center">
                 <span className="text-[9px] text-success uppercase font-bold block">Avg Deal</span>
                 <span className="text-h3 font-extrabold text-success">BDT {activeData.metrics.avgDealSize}</span>
               </div>
             </div>
           </div>
         </Card>
-
+ 
         {/* Team Performance */}
         <Card className="p-lg flex flex-col justify-between h-full min-h-[220px]">
           <div className="flex justify-between items-start mb-md">
             <span className="text-on-surface-variant text-label font-bold uppercase tracking-wider">Team Performance</span>
-            <CheckSquare className="w-5 h-5 text-primary" />
+            <Icon name="task_alt" className="w-5 h-5 text-sunrise" />
           </div>
           <div className="my-auto space-y-md w-full">
             <div className="flex justify-between items-center">
@@ -382,8 +374,8 @@ export default function CEODashboard() {
               <p className="text-[10px] font-bold uppercase text-on-surface-variant">Overdue Tasks</p>
               <div className="space-y-1">
                 {activeData.teamPerformance.overdueTasks.map((task, idx) => (
-                  <div key={idx} className="flex items-center gap-2 p-1.5 bg-error/5 border-l-2 border-error text-xs font-semibold text-error">
-                    <AlertCircle className="w-3.5 h-3.5" />
+                  <div key={idx} className="flex items-center gap-2 p-1.5 bg-ember/5 border-l-2 border-error text-xs font-semibold text-error">
+                    <Icon name="warning" className="w-3.5 h-3.5" />
                     <span>{task}</span>
                   </div>
                 ))}
@@ -391,63 +383,63 @@ export default function CEODashboard() {
             </div>
           </div>
         </Card>
-
+ 
         {/* This Week's Trips status */}
         <Card className="p-lg flex flex-col justify-between h-full min-h-[220px]">
           <div className="flex justify-between items-start mb-md">
             <span className="text-on-surface-variant text-label font-bold uppercase tracking-wider">This Week Trips</span>
-            <Compass className="w-5 h-5 text-primary" />
+            <Icon name="explore" className="w-5 h-5 text-sunrise" />
           </div>
           
           <div className="my-auto space-y-md w-full">
             <div className="grid grid-cols-3 gap-2 text-center">
-              <div className="bg-primary/5 p-2 border border-primary/10 rounded-none">
-                <span className="text-[20px] font-extrabold text-primary block leading-none">{activeData.trips.activeCount}</span>
+              <div className="bg-sunrise/5 p-2 border border-sunrise/10 rounded-[6px]">
+                <span className="text-[20px] font-extrabold text-sunrise block leading-none">{activeData.trips.activeCount}</span>
                 <span className="text-[9px] text-on-surface-variant uppercase font-bold">Active</span>
               </div>
-              <div className="bg-success/5 p-2 border border-success/10 rounded-none">
+              <div className="bg-success/5 p-2 border border-success/10 rounded-[6px]">
                 <span className="text-[20px] font-extrabold text-success block leading-none">{activeData.trips.departingCount}</span>
                 <span className="text-[9px] text-on-surface-variant uppercase font-bold">Departing</span>
               </div>
-              <div className="bg-slate-100 p-2 border border-outline-variant rounded-none">
+              <div className="bg-slate-100 p-2 border border-[#E0E0E0] rounded-[6px]">
                 <span className="text-[20px] font-extrabold text-on-surface block leading-none">{activeData.trips.returningCount}</span>
                 <span className="text-[9px] text-on-surface-variant uppercase font-bold">Returning</span>
               </div>
             </div>
-
+ 
             {activeData.trips.incident && (
-              <div className="flex items-center justify-between p-2 bg-error/5 border border-error/10">
+              <div className="flex items-center justify-between p-2 bg-ember/5 border border-error/10">
                 <div className="flex items-center gap-2 text-xs text-error font-bold leading-tight">
-                  <AlertTriangle className="w-4 h-4 text-error shrink-0" />
+                  <Icon name="warning" className="w-4 h-4 text-error shrink-0" />
                   <span>{activeData.trips.incident.title}</span>
                 </div>
                 <Badge variant="critical" className="shrink-0">Alert</Badge>
               </div>
             )}
-
-            <div className="flex justify-between items-center pt-2 border-t border-outline-variant/60">
+ 
+            <div className="flex justify-between items-center pt-2 border-t border-[#E0E0E0]/60">
               <span className="text-xs text-on-surface-variant font-medium">Host check-in status:</span>
               <span className="text-xs font-bold text-success flex items-center gap-1">
-                <CheckCircle className="w-3.5 h-3.5" />
+                <Icon name="check_circle" size={14} color="#2E7D32" />
                 {activeData.trips.hostStatus}
               </span>
             </div>
           </div>
         </Card>
       </section>
-
+ 
       {/* Row 2: Department Health, Escalations, Approvals, Log Feed */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-xl">
         {/* Left Side: Department Health & Trips Table (col-span 2) */}
         <div className="lg:col-span-2 space-y-xl">
           {/* Department Health Card */}
           <Card className="flex flex-col">
-            <div className="bg-slate-50 px-lg py-md border-b border-outline-variant flex justify-between items-center">
+            <div className="bg-slate-50 px-lg py-md border-b border-[#E0E0E0] flex justify-between items-center">
               <h3 className="text-h3 text-on-surface flex items-center gap-2">
-                <Users className="w-5 h-5 text-primary" />
+                <Icon name="groups" className="w-5 h-5 text-sunrise" />
                 Department Health
               </h3>
-              <button className="text-primary font-bold text-label hover:underline">Full Org Chart</button>
+              <button className="text-sunrise font-bold text-label hover:underline">Full Org Chart</button>
             </div>
             
             <div className="p-lg space-y-lg">
@@ -470,7 +462,7 @@ export default function CEODashboard() {
                       <span>{percent}%</span>
                     </div>
                     
-                    <div className="w-full bg-slate-100 h-2 rounded-none overflow-hidden border border-outline-variant/30">
+                    <div className="w-full bg-slate-100 h-2 rounded-[6px] overflow-hidden border border-[#E0E0E0]/30">
                       <div 
                         className={cn(
                           "h-full transition-all duration-300", 
@@ -482,7 +474,7 @@ export default function CEODashboard() {
                     
                     {dept.overdueCount > 0 && (
                       <p className="text-[10px] text-error font-bold flex items-center gap-1">
-                        <AlertCircle className="w-3 h-3" />
+                        <Icon name="warning" className="w-3 h-3" />
                         {dept.overdueCount} tasks overdue
                       </p>
                     )}
@@ -491,30 +483,30 @@ export default function CEODashboard() {
               })}
             </div>
           </Card>
-
+ 
           {/* Trips Table */}
           <div className="space-y-lg pt-2">
             <div className="flex justify-between items-center">
               <h3 className="text-h3 text-on-surface flex items-center gap-2">
-                <Compass className="w-5 h-5 text-primary" />
+                <Icon name="explore" className="w-5 h-5 text-sunrise" />
                 This Week&apos;s Trips
               </h3>
               <div className="flex gap-4">
                 <span className="flex items-center gap-1.5 text-label text-on-surface-variant font-semibold">
-                  <span className="w-2.5 h-2.5 rounded-none bg-blue-400"></span> Depart
+                  <span className="w-2.5 h-2.5 rounded-[6px] bg-blue-400"></span> Depart
                 </span>
                 <span className="flex items-center gap-1.5 text-label text-on-surface-variant font-semibold">
-                  <span className="w-2.5 h-2.5 rounded-none bg-success"></span> Active
+                  <span className="w-2.5 h-2.5 rounded-[6px] bg-success"></span> Active
                 </span>
                 <span className="flex items-center gap-1.5 text-label text-on-surface-variant font-semibold">
-                  <span className="w-2.5 h-2.5 rounded-none bg-slate-400"></span> Return
+                  <span className="w-2.5 h-2.5 rounded-[6px] bg-slate-400"></span> Return
                 </span>
               </div>
             </div>
             
-            <div className="bg-white border border-outline-variant rounded-none overflow-x-auto shadow-sm">
+            <div className="bg-white border border-[#E0E0E0] rounded-[6px] overflow-x-auto shadow-sm">
               <table className="w-full text-left border-collapse min-w-[500px]">
-                <thead className="bg-slate-50 border-b border-outline-variant">
+                <thead className="bg-slate-50 border-b border-[#E0E0E0]">
                   <tr>
                     <th className="px-6 py-4 text-label font-bold uppercase text-on-surface-variant">Trip ID</th>
                     <th className="px-6 py-4 text-label font-bold uppercase text-on-surface-variant">Destination</th>
@@ -526,13 +518,13 @@ export default function CEODashboard() {
                 <tbody className="divide-y divide-outline-variant">
                   {activeData.tripsList.map((trip) => (
                     <tr key={trip.id} className="hover:bg-slate-50 transition-colors">
-                      <td className="px-6 py-4 text-body text-primary font-bold">{trip.id}</td>
+                      <td className="px-6 py-4 text-body text-sunrise font-bold">{trip.id}</td>
                       <td className="px-6 py-4 text-body font-medium">{trip.destination}</td>
                       <td className="px-6 py-4 text-body text-on-surface-variant">{trip.group}</td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <span className={cn(
-                            "w-2 h-2 rounded-none",
+                            "w-2 h-2 rounded-[6px]",
                             trip.statusColor === 'success' && "bg-success status-pulse",
                             trip.statusColor === 'blue' && "bg-blue-400",
                             trip.statusColor === 'neutral' && "bg-slate-400"
@@ -541,8 +533,8 @@ export default function CEODashboard() {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <button className="hover:text-primary p-1 border border-transparent hover:border-outline-variant transition-all">
-                          <Eye className="w-4 h-4 text-on-surface-variant" />
+                        <button className="hover:text-sunrise p-1 border border-transparent hover:border-[#E0E0E0] transition-all">
+                          <Icon name="visibility" size={16} color="#555555" />
                         </button>
                       </td>
                     </tr>
@@ -557,12 +549,12 @@ export default function CEODashboard() {
         <div className="space-y-xl">
           {/* Approvals */}
           <Card className="flex flex-col">
-            <div className="bg-slate-50 px-lg py-md border-b border-outline-variant flex justify-between items-center">
+            <div className="bg-slate-50 px-lg py-md border-b border-[#E0E0E0] flex justify-between items-center">
               <h3 className="text-h3 text-on-surface flex items-center gap-2">
                 Approvals
               </h3>
               {approvals.length > 0 && (
-                <span className="bg-error text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+                <span className="bg-ember text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
                   {approvals.length}
                 </span>
               )}
@@ -571,30 +563,30 @@ export default function CEODashboard() {
             <div className="p-lg space-y-md">
               {approvals.length === 0 ? (
                 <div className="text-center py-6 text-on-surface-variant">
-                  <CheckCircle2 className="w-8 h-8 text-success mx-auto mb-2" />
+                  <Icon name="check_circle" className="w-8 h-8 text-success mx-auto mb-2" />
                   <p className="text-xs font-bold text-success">All approvals completed!</p>
                 </div>
               ) : (
                 approvals.map((app) => (
                   <div 
                     key={app.id} 
-                    className="p-4 border border-outline-variant bg-surface space-y-3 border-l-4 border-l-primary"
+                    className="p-4 border border-[#E0E0E0] bg-surface space-y-3 border-l-4 border-l-primary"
                   >
                     <div>
-                      <p className="text-[10px] font-bold text-primary uppercase tracking-wider">{app.classification}</p>
+                      <p className="text-[10px] font-bold text-sunrise uppercase tracking-wider">{app.classification}</p>
                       <h4 className="text-body font-bold text-on-surface">{app.title}</h4>
                     </div>
                     <p className="text-xs text-on-surface-variant leading-tight">{app.description}</p>
                     <div className="flex gap-2 pt-1">
                       <button 
                         onClick={() => handleApprove(app.id, app.title)}
-                        className="flex-1 bg-primary text-white py-2 px-3 font-bold text-label hover:bg-blue-700 transition-all rounded-none"
+                        className="flex-1 bg-sunrise text-white py-2 px-3 font-bold text-label hover:bg-blue-700 transition-all rounded-[6px]"
                       >
                         Approve
                       </button>
                       <button 
                         onClick={() => handleReject(app.id, app.title)}
-                        className="flex-1 bg-slate-100 text-on-surface border border-outline-variant py-2 px-3 font-bold text-label hover:bg-slate-200 transition-all rounded-none"
+                        className="flex-1 bg-slate-100 text-on-surface border border-[#E0E0E0] py-2 px-3 font-bold text-label hover:bg-slate-200 transition-all rounded-[6px]"
                       >
                         Reject
                       </button>
@@ -607,9 +599,9 @@ export default function CEODashboard() {
 
           {/* Escalations */}
           <Card className="flex flex-col">
-            <div className="bg-slate-50 px-lg py-md border-b border-outline-variant">
+            <div className="bg-slate-50 px-lg py-md border-b border-[#E0E0E0]">
               <h3 className="text-h3 text-on-surface flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-error" />
+                <Icon name="warning" className="w-5 h-5 text-error" />
                 Active Escalations
               </h3>
             </div>
@@ -639,7 +631,7 @@ export default function CEODashboard() {
           </Card>
 
           {/* Operations Feed */}
-          <div className="bg-slate-50 border border-outline-variant p-lg space-y-lg rounded-none shadow-inner">
+          <div className="bg-slate-50 border border-[#E0E0E0] p-lg space-y-lg rounded-[6px] shadow-inner">
             <h4 className="text-h4 text-on-surface flex items-center gap-2">
               Operations Feed
             </h4>
@@ -647,9 +639,9 @@ export default function CEODashboard() {
               {feedItems.map((item) => (
                 <div key={item.id} className="flex gap-3">
                   <span className={cn(
-                    "w-2.5 h-2.5 rounded-none mt-1 shrink-0",
-                    item.severity === 'primary' && "bg-primary",
-                    item.severity === 'error' && "bg-error",
+                    "w-2.5 h-2.5 rounded-[6px] mt-1 shrink-0",
+                    item.severity === 'primary' && "bg-sunrise",
+                    item.severity === 'error' && "bg-ember",
                     item.severity === 'success' && "bg-success"
                   )}></span>
                   <div>
@@ -667,11 +659,11 @@ export default function CEODashboard() {
       </section>
 
       {/* Footer block */}
-      <footer className="pt-xl pb-lg border-t border-outline-variant bg-slate-50 flex justify-between items-center text-on-surface-variant text-label">
+      <footer className="pt-xl pb-lg border-t border-[#E0E0E0] bg-slate-50 flex justify-between items-center text-on-surface-variant text-label">
         <p>© 2024 Bynd BD Travel Ops. All rights reserved.</p>
         <div className="flex gap-xl">
-          <a className="hover:text-primary transition-colors font-bold" href="#">Privacy Policy</a>
-          <a className="hover:text-primary transition-colors font-bold" href="#">System Status: 100%</a>
+          <a className="hover:text-sunrise transition-colors font-bold" href="#">Privacy Policy</a>
+          <a className="hover:text-sunrise transition-colors font-bold" href="#">System Status: 100%</a>
         </div>
       </footer>
     </div>

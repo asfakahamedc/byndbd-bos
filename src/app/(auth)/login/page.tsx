@@ -39,8 +39,8 @@ export default function LoginPage() {
         <div className="relative z-10 space-y-xxl">
           {/* Brand Logo */}
           <div className="flex items-center gap-sm">
-            <div className="w-12 h-12 bg-white flex items-center justify-center rounded-none shadow-lg">
-              <span className="material-symbols-outlined text-primary text-[32px] font-fill">hub</span>
+            <div className="w-12 h-12 bg-white flex items-center justify-center rounded-[6px] shadow-lg">
+              <span className="material-symbols-outlined text-sunrise text-[32px] font-fill">hub</span>
             </div>
             <span className="font-sans text-[48px] font-semibold tracking-tighter text-white">Bynd BD</span>
           </div>
@@ -56,19 +56,19 @@ export default function LoginPage() {
           {/* Features List */}
           <ul className="space-y-md">
             <li className="flex items-center gap-sm text-body group">
-              <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">check_circle</span>
+              <span className="material-symbols-outlined text-sunrise group-hover:scale-110 transition-transform">check_circle</span>
               <span>Real-time monitoring</span>
             </li>
             <li className="flex items-center gap-sm text-body group">
-              <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">check_circle</span>
+              <span className="material-symbols-outlined text-sunrise group-hover:scale-110 transition-transform">check_circle</span>
               <span>Team coordination</span>
             </li>
             <li className="flex items-center gap-sm text-body group">
-              <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">check_circle</span>
+              <span className="material-symbols-outlined text-sunrise group-hover:scale-110 transition-transform">check_circle</span>
               <span>Trip management</span>
             </li>
             <li className="flex items-center gap-sm text-body group">
-              <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">check_circle</span>
+              <span className="material-symbols-outlined text-sunrise group-hover:scale-110 transition-transform">check_circle</span>
               <span>Secure &amp; scalable</span>
             </li>
           </ul>
@@ -76,11 +76,11 @@ export default function LoginPage() {
 
         {/* Footer Quote / Meta */}
         <div className="relative z-10 pt-xl">
-          <div className="p-lg bg-white/5 backdrop-blur-md rounded-none border border-white/10">
+          <div className="p-lg bg-white/5 backdrop-blur-md rounded-[6px] border border-white/10">
             <p className="text-body italic text-white/70">
               &ldquo;Efficiency is doing things right; effectiveness is doing the right things.&rdquo;
             </p>
-            <div className="mt-xs text-primary text-label uppercase tracking-widest">— Peter Drucker</div>
+            <div className="mt-xs text-sunrise text-label uppercase tracking-widest">— Peter Drucker</div>
           </div>
         </div>
       </section>
@@ -90,10 +90,10 @@ export default function LoginPage() {
         <div className="w-full max-w-md space-y-xl">
           {/* Header (Mobile Only Logo) */}
           <div className="md:hidden flex flex-col items-center mb-xl">
-            <div className="w-14 h-14 bg-primary flex items-center justify-center rounded-none shadow-md mb-md">
-              <span className="material-symbols-outlined text-on-primary text-[36px] font-fill">hub</span>
+            <div className="w-14 h-14 bg-sunrise flex items-center justify-center rounded-[6px] shadow-md mb-md">
+              <span className="material-symbols-outlined text-white text-[36px] font-fill">hub</span>
             </div>
-            <h2 className="font-sans text-h1 text-primary">Bynd BD</h2>
+            <h2 className="font-sans text-h1 text-sunrise">Bynd BD</h2>
           </div>
 
           <div className="text-left space-y-xs">
@@ -103,7 +103,7 @@ export default function LoginPage() {
 
           {/* Error Message Block */}
           {error && (
-            <div className="p-md bg-error/10 border border-error text-error text-body rounded-none">
+            <div className="p-md bg-ember/10 border border-error text-error text-body rounded-[6px]">
               <div className="flex items-start gap-sm">
                 <span className="material-symbols-outlined text-[20px]">error</span>
                 <span>{error}</span>
@@ -118,11 +118,11 @@ export default function LoginPage() {
                 Email Address
               </label>
               <div className="relative flex items-center group">
-                <span className="material-symbols-outlined absolute left-3 text-outline group-focus-within:text-primary transition-colors">
+                <span className="material-symbols-outlined absolute left-3 text-outline group-focus-within:text-sunrise transition-colors">
                   mail
                 </span>
                 <input
-                  className="w-full h-[40px] pl-10 pr-4 py-2 rounded-none border border-outline-variant bg-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body outline-none"
+                  className="w-full h-[40px] pl-10 pr-4 py-2 rounded-[6px] border border-[#E0E0E0] bg-surface focus:ring-2 focus:ring-primary/20 focus:border-sunrise transition-all text-body outline-none"
                   id="email"
                   name="email"
                   placeholder="name@company.com"
@@ -141,16 +141,16 @@ export default function LoginPage() {
                 <label className="text-label text-on-surface-variant" htmlFor="password">
                   Password
                 </label>
-                <a className="text-label text-primary hover:underline transition-all" href="#">
+                <a className="text-label text-sunrise hover:underline transition-all" href="#">
                   Forgot password?
                 </a>
               </div>
               <div className="relative flex items-center group">
-                <span className="material-symbols-outlined absolute left-3 text-outline group-focus-within:text-primary transition-colors">
+                <span className="material-symbols-outlined absolute left-3 text-outline group-focus-within:text-sunrise transition-colors">
                   lock
                 </span>
                 <input
-                  className="w-full h-[40px] pl-10 pr-12 py-2 rounded-none border border-outline-variant bg-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body outline-none"
+                  className="w-full h-[40px] pl-10 pr-12 py-2 rounded-[6px] border border-[#E0E0E0] bg-surface focus:ring-2 focus:ring-primary/20 focus:border-sunrise transition-all text-body outline-none"
                   id="password"
                   name="password"
                   placeholder="••••••••"
@@ -175,7 +175,7 @@ export default function LoginPage() {
             {/* Remember Me */}
             <div className="flex items-center gap-sm">
               <input
-                className="w-4 h-4 text-primary border-outline rounded-none focus:ring-primary"
+                className="w-4 h-4 text-sunrise border-outline rounded-[6px] focus:ring-primary"
                 id="remember"
                 name="remember"
                 type="checkbox"
@@ -191,7 +191,7 @@ export default function LoginPage() {
 
             {/* Submit Button */}
             <button
-              className="w-full h-[40px] px-6 bg-primary text-on-primary text-h4 rounded-none shadow-lg hover:bg-primary/90 active:scale-[0.98] transition-all transform duration-150 flex items-center justify-center gap-sm disabled:opacity-75 disabled:pointer-events-none"
+              className="w-full h-[40px] px-6 bg-sunrise text-white text-h4 rounded-[6px] shadow-lg hover:bg-sunrise/90 active:scale-[0.98] transition-all transform duration-150 flex items-center justify-center gap-sm disabled:opacity-75 disabled:pointer-events-none"
               type="submit"
               disabled={isPending}
             >
@@ -210,13 +210,13 @@ export default function LoginPage() {
           <div className="text-center pt-md space-y-lg">
             <p className="text-body text-on-surface-variant">
               Don&apos;t have access?{' '}
-              <a className="text-primary font-semibold hover:underline" href="#">
+              <a className="text-sunrise font-semibold hover:underline" href="#">
                 Contact your admin.
               </a>
             </p>
             {/* Security Badge */}
-            <div className="flex items-center justify-center gap-xs px-md py-sm bg-surface-container-low border border-outline-variant rounded-full w-fit mx-auto">
-              <span className="material-symbols-outlined text-[18px] text-primary">verified_user</span>
+            <div className="flex items-center justify-center gap-xs px-md py-sm bg-surface-container-low border border-[#E0E0E0] rounded-full w-fit mx-auto">
+              <span className="material-symbols-outlined text-[18px] text-sunrise">verified_user</span>
               <span className="text-label text-on-surface-variant uppercase tracking-wider">
                 Enterprise-grade Security
               </span>

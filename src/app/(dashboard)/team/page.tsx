@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { ChevronRight, Users } from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 import { getTeamMembers } from '@/actions/iam';
 import { getCurrentUser } from '@/actions/auth';
 import { TeamList } from '@/components/team/team-list';
@@ -12,24 +12,14 @@ export const metadata: Metadata = {
     'Manage and view all team members across the Bynd BD Business Operating System.',
 };
 
-/**
- * Team Directory Page.
- *
- * Server Component — fetches current user (for permissions) and the full team
- * roster concurrently, then renders the TeamList table and optionally the
- * InviteMember control based on the caller's access layer.
- */
 export default async function TeamDirectoryPage() {
-  // Concurrent data fetches for performance
   const [currentUser, members] = await Promise.all([
     getCurrentUser(),
     getTeamMembers(),
   ]);
 
-  // Only Layer 0–2 (Owner, CEO, Operations Lead) may invite members
   const canInvite = currentUser !== null && currentUser.layer <= 2;
 
-  // Breakdown stats for the summary bar
   const activeCount = members.filter((m) => m.status === 'active').length;
   const layerGroups = members.reduce<Record<number, number>>((acc, m) => {
     acc[m.layer] = (acc[m.layer] || 0) + 1;
@@ -42,47 +32,46 @@ export default async function TeamDirectoryPage() {
       <section className="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xxl">
         <div>
           {/* Breadcrumbs */}
-          <nav className="flex items-center text-label text-outline mb-xs">
+          <nav className="flex items-center text-xs font-poppins text-[#9E9E9E] mb-xs">
             <span>People</span>
-            <ChevronRight className="w-3.5 h-3.5 mx-xs" />
-            <span className="text-on-surface-variant font-medium">Team Directory</span>
+            <Icon name="chevron_right" size={14} color="#9E9E9E" className="mx-xs" />
+            <span className="text-dusk font-medium">Team Directory</span>
           </nav>
-          <h2 className="text-h1 text-on-background">Team Directory</h2>
-          <p className="text-body text-on-surface-variant mt-xs">
+          <h2 className="text-3xl font-poppins font-bold text-dusk">Team Directory</h2>
+          <p className="text-sm font-ubuntu text-[#555555] mt-xs">
             All active team members across Bynd BD operations.
           </p>
         </div>
 
-        {/* Invite Member button — rendered only when the current user has permission */}
         <TeamControls canInvite={canInvite} />
       </section>
 
       {/* ── Summary Stats Bar ───────────────────────────────────────────────── */}
       <section className="grid grid-cols-2 sm:grid-cols-4 gap-md mb-xl">
         {/* Total Members */}
-        <div className="bg-white border border-outline-variant p-md rounded-none">
-          <p className="text-label text-on-surface-variant uppercase tracking-wider">Total Members</p>
-          <p className="text-h1 font-bold text-on-background mt-xs">{members.length}</p>
+        <div className="bg-white border border-[#E0E0E0] p-md rounded-lg shadow-sm">
+          <p className="text-[11px] font-poppins font-semibold text-[#555555] uppercase tracking-wider">Total Members</p>
+          <p className="text-3xl font-poppins font-bold text-dusk mt-xs">{members.length}</p>
         </div>
 
         {/* Active Members */}
-        <div className="bg-white border border-outline-variant p-md rounded-none">
-          <p className="text-label text-on-surface-variant uppercase tracking-wider">Active</p>
-          <p className="text-h1 font-bold text-green-700 mt-xs">{activeCount}</p>
+        <div className="bg-white border border-[#E0E0E0] p-md rounded-lg shadow-sm">
+          <p className="text-[11px] font-poppins font-semibold text-[#555555] uppercase tracking-wider">Active</p>
+          <p className="text-3xl font-poppins font-bold text-[#2E7D32] mt-xs">{activeCount}</p>
         </div>
 
         {/* Unique Layers */}
-        <div className="bg-white border border-outline-variant p-md rounded-none">
-          <p className="text-label text-on-surface-variant uppercase tracking-wider">Unique Layers</p>
-          <p className="text-h1 font-bold text-primary mt-xs">
+        <div className="bg-white border border-[#E0E0E0] p-md rounded-lg shadow-sm">
+          <p className="text-[11px] font-poppins font-semibold text-[#555555] uppercase tracking-wider">Unique Layers</p>
+          <p className="text-3xl font-poppins font-bold text-sunrise mt-xs">
             {Object.keys(layerGroups).length}
           </p>
         </div>
 
         {/* Field Staff (Layer 5 Hosts) */}
-        <div className="bg-white border border-outline-variant p-md rounded-none">
-          <p className="text-label text-on-surface-variant uppercase tracking-wider">Field Staff</p>
-          <p className="text-h1 font-bold text-teal-700 mt-xs">
+        <div className="bg-white border border-[#E0E0E0] p-md rounded-lg shadow-sm">
+          <p className="text-[11px] font-poppins font-semibold text-[#555555] uppercase tracking-wider">Field Staff</p>
+          <p className="text-3xl font-poppins font-bold text-teal-700 mt-xs">
             {layerGroups[5] || 0}
           </p>
         </div>
@@ -91,8 +80,8 @@ export default async function TeamDirectoryPage() {
       {/* ── Team Directory Table ─────────────────────────────────────────────── */}
       <section>
         <div className="flex items-center gap-sm mb-md">
-          <Users className="w-5 h-5 text-primary" />
-          <h3 className="text-h3 font-bold text-on-background">All Members</h3>
+          <Icon name="groups" size={20} color="#FF5F0F" />
+          <h3 className="text-lg font-poppins font-semibold text-dusk">All Members</h3>
         </div>
 
         <TeamList members={members} />

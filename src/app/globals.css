@@ -3,13 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --background: #f9f9ff;
-  --foreground: #141b2b;
+  --background: #FAF9F2;
+  --foreground: #1D1D1B;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+  font-family: var(--font-ubuntu), sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, button, .font-poppins {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 300,
+    'GRAD' 0,
+    'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 @layer utilities {
@@ -21,11 +36,11 @@ body {
 /* Custom design system components */
 .card-elevation {
   background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border: 1px solid #E0E0E0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   transition: all 0.2s ease;
 }
 
 .card-elevation:hover {
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
 }

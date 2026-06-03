@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from 'react';
 import { inviteTeamMember } from '@/actions/iam';
-import { X, UserPlus, AlertCircle } from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 
 interface InviteMemberModalProps {
   onClose: () => void;
@@ -72,12 +72,12 @@ export function InviteMemberModal({ onClose }: InviteMemberModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-md font-sans text-on-surface">
-      <div className="bg-white border-2 border-outline w-full max-w-lg rounded-none shadow-2xl relative flex flex-col">
+      <div className="bg-white border-2 border-outline w-full max-w-lg rounded-[6px] shadow-2xl relative flex flex-col">
         
         {/* Modal Header */}
-        <div className="px-xl py-md border-b border-outline-variant flex items-center justify-between bg-surface-container-low">
+        <div className="px-xl py-md border-b border-[#E0E0E0] flex items-center justify-between bg-surface-container-low">
           <div className="flex items-center gap-sm">
-            <UserPlus className="w-5 h-5 text-primary" />
+            <Icon name="person_add" className="w-5 h-5 text-sunrise" />
             <h3 className="text-h3 font-bold text-on-background">Invite Team Member</h3>
           </div>
           <button
@@ -86,7 +86,7 @@ export function InviteMemberModal({ onClose }: InviteMemberModalProps) {
             disabled={isPending}
             aria-label="Close invite modal"
           >
-            <X className="w-5 h-5" />
+            <Icon name="close" className="w-5 h-5" />
           </button>
         </div>
 
@@ -111,8 +111,8 @@ export function InviteMemberModal({ onClose }: InviteMemberModalProps) {
             
             {/* Error Banner */}
             {error && (
-              <div className="flex items-start gap-sm p-md bg-error/10 border border-error text-error text-body rounded-none">
-                <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+              <div className="flex items-start gap-sm p-md bg-ember/10 border border-error text-error text-body rounded-[6px]">
+                <Icon name="warning" className="w-4 h-4 mt-0.5 shrink-0" />
                 <span>{error}</span>
               </div>
             )}
@@ -129,7 +129,7 @@ export function InviteMemberModal({ onClose }: InviteMemberModalProps) {
                 placeholder="e.g. Maruf Hossain"
                 required
                 disabled={isPending}
-                className="w-full h-[40px] px-md border border-outline-variant bg-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body outline-none rounded-none disabled:opacity-60"
+                className="w-full h-[40px] px-md border border-[#E0E0E0] bg-surface focus:ring-2 focus:ring-primary/20 focus:border-sunrise transition-all text-body outline-none rounded-[6px] disabled:opacity-60"
               />
             </div>
 
@@ -145,7 +145,7 @@ export function InviteMemberModal({ onClose }: InviteMemberModalProps) {
                 placeholder="member@byndbd.com"
                 required
                 disabled={isPending}
-                className="w-full h-[40px] px-md border border-outline-variant bg-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body outline-none rounded-none disabled:opacity-60"
+                className="w-full h-[40px] px-md border border-[#E0E0E0] bg-surface focus:ring-2 focus:ring-primary/20 focus:border-sunrise transition-all text-body outline-none rounded-[6px] disabled:opacity-60"
               />
             </div>
 
@@ -162,7 +162,7 @@ export function InviteMemberModal({ onClose }: InviteMemberModalProps) {
                   required
                   disabled={isPending}
                   defaultValue=""
-                  className="w-full h-[40px] px-md border border-outline-variant bg-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body outline-none rounded-none disabled:opacity-60"
+                  className="w-full h-[40px] px-md border border-[#E0E0E0] bg-surface focus:ring-2 focus:ring-primary/20 focus:border-sunrise transition-all text-body outline-none rounded-[6px] disabled:opacity-60"
                 >
                   <option value="" disabled>Select layer...</option>
                   {LAYER_OPTIONS.map((opt) => (
@@ -182,7 +182,7 @@ export function InviteMemberModal({ onClose }: InviteMemberModalProps) {
                   id="invite-department"
                   name="department"
                   disabled={isPending}
-                  className="w-full h-[40px] px-md border border-outline-variant bg-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body outline-none rounded-none disabled:opacity-60"
+                  className="w-full h-[40px] px-md border border-[#E0E0E0] bg-surface focus:ring-2 focus:ring-primary/20 focus:border-sunrise transition-all text-body outline-none rounded-[6px] disabled:opacity-60"
                 >
                   <option value="">None / Cross-functional</option>
                   {DEPARTMENT_OPTIONS.map((dept) => (
@@ -193,24 +193,24 @@ export function InviteMemberModal({ onClose }: InviteMemberModalProps) {
             </div>
 
             {/* Invite Notice */}
-            <p className="text-label text-on-surface-variant bg-surface-container-low border border-outline-variant p-md rounded-none">
+            <p className="text-label text-on-surface-variant bg-surface-container-low border border-[#E0E0E0] p-md rounded-[6px]">
               An invitation email will be sent to the address above. The invitee must set a password before they can access the BOS.
             </p>
 
             {/* Footer Actions */}
-            <div className="flex items-center justify-end gap-md pt-md border-t border-outline-variant">
+            <div className="flex items-center justify-end gap-md pt-md border-t border-[#E0E0E0]">
               <button
                 type="button"
                 onClick={onClose}
                 disabled={isPending}
-                className="px-lg h-[40px] border border-outline bg-white hover:bg-surface-container-low text-on-surface font-bold text-body active:scale-[0.98] transition-all rounded-none disabled:opacity-60"
+                className="px-lg h-[40px] border border-outline bg-white hover:bg-surface-container-low text-on-surface font-bold text-body active:scale-[0.98] transition-all rounded-[6px] disabled:opacity-60"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={isPending}
-                className="px-lg h-[40px] bg-primary hover:bg-primary/90 text-white font-bold text-body active:scale-[0.98] transition-all rounded-none shadow-md flex items-center justify-center gap-sm disabled:opacity-70 disabled:pointer-events-none"
+                className="px-lg h-[40px] bg-sunrise hover:bg-sunrise/90 text-white font-bold text-body active:scale-[0.98] transition-all rounded-[6px] shadow-md flex items-center justify-center gap-sm disabled:opacity-70 disabled:pointer-events-none"
               >
                 {isPending ? (
                   <>
@@ -219,7 +219,7 @@ export function InviteMemberModal({ onClose }: InviteMemberModalProps) {
                   </>
                 ) : (
                   <>
-                    <UserPlus className="w-4 h-4" />
+                    <Icon name="person_add" className="w-4 h-4" />
                     <span>Send Invitation</span>
                   </>
                 )}

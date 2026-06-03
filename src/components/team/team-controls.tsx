@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { UserPlus } from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 import { InviteMemberModal } from './invite-member-modal';
 
 interface TeamControlsProps {
@@ -20,9 +20,9 @@ export function TeamControls({ canInvite }: TeamControlsProps) {
       <button
         id="invite-member-btn"
         onClick={() => setIsInviteModalOpen(true)}
-        className="flex items-center gap-xs bg-primary hover:bg-primary/90 text-white px-xl py-sm rounded-none border border-primary/20 hover:shadow-md transition-all text-h4 font-bold tracking-wide active:scale-95 h-[40px]"
+        className="flex items-center gap-xs bg-sunrise hover:bg-sunrise/90 text-white px-xl py-sm rounded-[6px] border border-sunrise/20 hover:shadow-md transition-all text-h4 font-bold tracking-wide active:scale-95 h-[40px]"
       >
-        <UserPlus className="w-5 h-5" />
+        <Icon name="person_add" className="w-5 h-5" />
         <span>Invite Member</span>
       </button>
 

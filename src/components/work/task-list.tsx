@@ -2,17 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { 
-  Search, 
-  Filter, 
-  AlertOctagon, 
-  User, 
-  ChevronLeft, 
-  ChevronRight, 
-  MoreVertical,
-  CheckCircle,
-  Circle
-} from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
 export interface Task {
@@ -73,11 +63,11 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
     Critical: 'bg-red-100 text-red-700 border-red-200',
     High: 'bg-orange-100 text-orange-700 border-orange-200',
     Medium: 'bg-blue-100 text-blue-700 border-blue-200',
-    Low: 'bg-surface-container text-outline border-outline-variant/30'
+    Low: 'bg-surface-container text-outline border-[#E0E0E0]/30'
   };
 
   const statusColors = {
-    'Not Started': 'bg-surface-container text-outline border-outline-variant/30',
+    'Not Started': 'bg-surface-container text-outline border-[#E0E0E0]/30',
     'In Progress': 'bg-blue-100 text-blue-700 border-blue-200',
     'Review': 'bg-purple-100 text-purple-700 border-purple-200',
     'Completed': 'bg-green-100 text-green-700 border-green-200'
@@ -91,14 +81,14 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
     <div className="space-y-xl">
       {/* Search & Tabs Segment */}
       <section className="flex flex-col md:flex-row md:items-center justify-between gap-md">
-        <div className="flex bg-surface-container rounded-none p-[2px] border border-outline-variant w-fit">
+        <div className="flex bg-surface-container rounded-[6px] p-[2px] border border-[#E0E0E0] w-fit">
           <button 
             onClick={() => setActiveFilterTab('all')}
             className={cn(
               "px-md py-xs text-label font-bold transition-all",
               activeFilterTab === 'all' 
-                ? "bg-white shadow-sm text-primary border border-outline-variant/10 rounded-none" 
-                : "text-on-surface-variant hover:text-primary"
+                ? "bg-white shadow-sm text-sunrise border border-[#E0E0E0]/10 rounded-[6px]" 
+                : "text-on-surface-variant hover:text-sunrise"
             )}
           >
             All Activity
@@ -108,8 +98,8 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
             className={cn(
               "px-md py-xs text-label font-bold transition-all",
               activeFilterTab === 'personal' 
-                ? "bg-white shadow-sm text-primary border border-outline-variant/10 rounded-none" 
-                : "text-on-surface-variant hover:text-primary"
+                ? "bg-white shadow-sm text-sunrise border border-[#E0E0E0]/10 rounded-[6px]" 
+                : "text-on-surface-variant hover:text-sunrise"
             )}
           >
             Personal
@@ -118,21 +108,21 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
 
         {/* Global Task Search bar */}
         <div className="relative w-full md:w-96">
-          <Search className="w-4 h-4 absolute left-md top-1/2 -translate-y-1/2 text-outline-variant" />
+          <Icon name="search" className="absolute left-md top-1/2 -translate-y-1/2 text-outline-variant text-[16px] w-4 h-4 flex items-center justify-center" />
           <input
             type="text"
             placeholder="Search tasks, projects..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-xl pr-md py-xs bg-surface-container-low border border-outline-variant rounded-none focus:border-primary focus:ring-0 outline-none text-body transition-all"
+            className="w-full pl-xl pr-md py-xs bg-surface-container-low border border-[#E0E0E0] rounded-[6px] focus:border-sunrise focus:ring-0 outline-none text-body transition-all"
           />
         </div>
       </section>
 
       {/* Filters Strip */}
-      <section className="flex flex-wrap items-center gap-md bg-white p-sm border border-outline-variant">
-        <div className="flex items-center gap-sm px-md py-xs border border-outline-variant cursor-pointer hover:bg-surface-container transition-colors">
-          <Filter className="w-4 h-4 text-outline" />
+      <section className="flex flex-wrap items-center gap-md bg-white p-sm border border-[#E0E0E0]">
+        <div className="flex items-center gap-sm px-md py-xs border border-[#E0E0E0] cursor-pointer hover:bg-surface-container transition-colors">
+          <Icon name="filter_list" className="text-outline text-[16px] w-4 h-4 flex items-center justify-center" />
           <select 
             value={statusFilter} 
             onChange={(e) => setStatusFilter(e.target.value)}
@@ -146,8 +136,8 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
           </select>
         </div>
 
-        <div className="flex items-center gap-sm px-md py-xs border border-outline-variant cursor-pointer hover:bg-surface-container transition-colors">
-          <AlertOctagon className="w-4 h-4 text-outline" />
+        <div className="flex items-center gap-sm px-md py-xs border border-[#E0E0E0] cursor-pointer hover:bg-surface-container transition-colors">
+          <Icon name="warning" className="text-outline text-[16px] w-4 h-4 flex items-center justify-center" />
           <select 
             value={priorityFilter} 
             onChange={(e) => setPriorityFilter(e.target.value)}
@@ -167,16 +157,16 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
       </section>
 
       {/* Table Frame Container */}
-      <div className="bg-white border border-outline-variant rounded-none overflow-hidden shadow-sm">
-        <div className="px-xl py-md border-b border-outline-variant flex items-center justify-between bg-surface-bright">
+      <div className="bg-white border border-[#E0E0E0] rounded-[6px] overflow-hidden shadow-sm">
+        <div className="px-xl py-md border-b border-[#E0E0E0] flex items-center justify-between bg-surface-bright">
           <h4 className="text-h3 text-on-background">Active Tasks</h4>
           <div className="flex items-center gap-md">
-            <span className="material-symbols-outlined text-outline cursor-pointer"><MoreVertical className="w-4 h-4" /></span>
+            <Icon name="more_vert" className="text-outline cursor-pointer text-[18px]" />
           </div>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
-            <thead className="bg-surface-container-low text-on-surface-variant text-label uppercase tracking-wider border-b border-outline-variant">
+            <thead className="bg-surface-container-low text-on-surface-variant text-label uppercase tracking-wider border-b border-[#E0E0E0]">
               <tr className="table-row-48">
                 <th className="px-xl py-md font-bold">Task Name</th>
                 <th className="px-xl py-md font-bold">Project</th>
@@ -204,17 +194,17 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
                               e.stopPropagation(); // Avoid triggering row details click
                               toggleComplete(task.id);
                             }}
-                            className="text-outline hover:text-primary transition-colors flex items-center justify-center p-0.5 focus:outline-none"
+                            className="text-outline hover:text-sunrise transition-colors flex items-center justify-center p-0.5 focus:outline-none"
                           >
                             {isCompleted ? (
-                              <CheckCircle className="w-5 h-5 text-primary" />
+                              <Icon name="check_circle" className="text-sunrise text-[20px]" />
                             ) : (
-                              <Circle className="w-5 h-5 text-outline-variant hover:text-outline" />
+                              <Icon name="radio_button_unchecked" className="text-outline-variant hover:text-outline text-[20px]" />
                             )}
                           </button>
                           <span 
                             className={cn(
-                              "font-medium group-hover:text-primary transition-colors",
+                              "font-medium group-hover:text-sunrise transition-colors",
                               isCompleted && "text-outline line-through"
                             )}
                           >
@@ -230,7 +220,7 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
 
                       {/* Priority Field */}
                       <td className="px-xl py-md">
-                        <span className={cn("px-sm py-[2px] border text-label font-bold rounded-none", priorityColors[task.priority])}>
+                        <span className={cn("px-sm py-[2px] border text-label font-bold rounded-[6px]", priorityColors[task.priority])}>
                           {task.priority}
                         </span>
                       </td>
@@ -248,7 +238,7 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
                             />
                           ) : (
                             <div className="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-[10px] font-bold">
-                              <User className="w-3.5 h-3.5" />
+                              <Icon name="person" className="w-3.5 h-3.5" />
                             </div>
                           )}
                           <span className="text-label font-normal">{task.assigned_to.name}</span>
@@ -262,7 +252,7 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
 
                       {/* Status Field */}
                       <td className="px-xl py-md text-center">
-                        <span className={cn("px-sm py-[2px] border text-label font-bold rounded-none", statusColors[task.status])}>
+                        <span className={cn("px-sm py-[2px] border text-label font-bold rounded-[6px]", statusColors[task.status])}>
                           {task.status}
                         </span>
                       </td>
@@ -281,19 +271,19 @@ export function TaskList({ tasks: initialTasks }: TaskListProps) {
         </div>
 
         {/* Pagination Footer */}
-        <div className="px-xl py-md border-t border-outline-variant flex items-center justify-between bg-surface-bright">
+        <div className="px-xl py-md border-t border-[#E0E0E0] flex items-center justify-between bg-surface-bright">
           <span className="text-label text-outline">
             Showing 1 to {filteredTasks.length} of {filteredTasks.length} tasks
           </span>
           <div className="flex items-center gap-xs">
-            <button className="p-1 border border-outline-variant hover:bg-surface-container transition-colors disabled:opacity-50" disabled>
-              <ChevronLeft className="w-4 h-4 text-outline" />
+            <button className="p-1 border border-[#E0E0E0] hover:bg-surface-container transition-colors disabled:opacity-50" disabled>
+              <Icon name="chevron_left" className="text-outline text-[18px] w-4 h-4 flex items-center justify-center" />
             </button>
-            <button className="px-3 py-1 border border-primary bg-primary-container/10 text-primary text-label font-bold rounded-none">
+            <button className="px-3 py-1 border border-sunrise bg-sunrise-container/10 text-sunrise text-label font-bold rounded-[6px]">
               1
             </button>
-            <button className="p-1 border border-outline-variant hover:bg-surface-container transition-colors disabled:opacity-50" disabled>
-              <ChevronRight className="w-4 h-4 text-outline" />
+            <button className="p-1 border border-[#E0E0E0] hover:bg-surface-container transition-colors disabled:opacity-50" disabled>
+              <Icon name="chevron_right" className="text-outline text-[18px] w-4 h-4 flex items-center justify-center" />
             </button>
           </div>
         </div>

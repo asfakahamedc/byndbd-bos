@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Timer, AlertTriangle, ShieldAlert } from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
 export interface ClassBTimerProps {
@@ -54,7 +54,7 @@ export default function ClassBTimer({
   return (
     <div 
       className={cn(
-        "p-md border rounded-none border-l-4 transition-colors duration-200",
+        "p-md border rounded-[6px] border-l-4 transition-colors duration-200",
         isIntercepted 
           ? "border-green-200 bg-green-50 border-l-green-500" 
           : "border-amber-200 bg-amber-50 border-l-amber-500"
@@ -65,12 +65,12 @@ export default function ClassBTimer({
           <span className="flex items-center gap-1.5 text-xs font-bold text-amber-800 uppercase tracking-wide">
             {isIntercepted ? (
               <>
-                <ShieldAlert className="w-3.5 h-3.5 text-green-600" />
+                <Icon name="admin_panel_settings" className="w-3.5 h-3.5 text-green-600" />
                 Objection Registered
               </>
             ) : (
               <>
-                <AlertTriangle className="w-3.5 h-3.5 text-amber-600 animate-bounce" />
+                <Icon name="warning" className="w-3.5 h-3.5 text-amber-600 animate-bounce" />
                 Class B Action Pending
               </>
             )}
@@ -112,13 +112,13 @@ export default function ClassBTimer({
       {!isIntercepted ? (
         <button
           onClick={handleIntercept}
-          className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-none border border-amber-600 active:scale-[0.99] transition-transform text-label tracking-widest uppercase mt-2 flex items-center justify-center gap-2"
+          className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-[6px] border border-amber-600 active:scale-[0.99] transition-transform text-label tracking-widest uppercase mt-2 flex items-center justify-center gap-2"
         >
-          <Timer className="w-4 h-4" />
+          <Icon name="timer" className="w-4 h-4" />
           [ INTERCEPT / OBJECT ]
         </button>
       ) : (
-        <div className="w-full bg-green-600 text-white font-bold py-2 px-4 rounded-none text-center text-xs tracking-wider uppercase mt-2">
+        <div className="w-full bg-green-600 text-white font-bold py-2 px-4 rounded-[6px] text-center text-xs tracking-wider uppercase mt-2">
           ACTION HALTED BY CO-FOUNDER OBJECTION
         </div>
       )}

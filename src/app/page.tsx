@@ -17,7 +17,7 @@ export default async function Home() {
 
     return (
       <main className="flex min-h-screen items-center justify-center p-4 bg-slate-50 font-sans">
-        <div className="w-full max-w-2xl bg-red-50 text-red-900 border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-6">
+        <div className="w-full max-w-2xl bg-red-50 text-red-900 border-2 border-black rounded-[6px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-6">
           <h1 className="text-2xl font-bold mb-2 uppercase tracking-wide">
             🚨 BOS SYSTEM DIAGNOSTICS CRITICAL
           </h1>
@@ -34,7 +34,7 @@ export default async function Home() {
             </ul>
           </div>
 
-          <div className="font-mono text-xs bg-slate-900 text-slate-100 p-4 border border-slate-700 overflow-x-auto w-full max-w-2xl mt-4 whitespace-pre-wrap rounded-none">
+          <div className="font-mono text-xs bg-slate-900 text-slate-100 p-4 border border-slate-700 overflow-x-auto w-full max-w-2xl mt-4 whitespace-pre-wrap rounded-[6px]">
             {errorMessage}
             {errorStack ? `\n\n${errorStack}` : ''}
           </div>
